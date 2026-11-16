@@ -35,14 +35,16 @@ access-controlled system. Do not add them to this repository or an npm package.
 
 ## What this project does
 
-`@plasius/arcade-games` provides a small, strongly-typed schema library:
+`@plasius/arcade-games` owns the lazy catalogue and original spatial game content.
+Reuse released Plasius schema, runtime, multiplayer, GPU, physics and audio
+packages. Do not implement a second simulation, authentication or persistence
+framework here. Metadata, generated seeds and a passing unit suite cannot prove
+playability, rights clearance or ten-hour human qualification.
 
-- A fluent field builder (e.g. `field().string().required()`),
-- Built-in validators for common standards (ISO/RFC/OWASP, etc.),
-- PII annotations + redaction utilities,
-- Type inference for safe, consistent entities across projects.
-
-Contributions typically fall into: new validators, field builder features, type improvements, docs, and tooling quality.
+Derive tests from the linked Project acceptance criteria before code. Keep every
+changed source in combined LCOV and all coverage metrics at least 80%. Game
+implementations require authored content, valid generation, predominantly-touch
+human evaluation, desktop parity and the complete host-owned launch barrier.
 
 ---
 
@@ -77,7 +79,6 @@ npm run test:watch
 
 ```bash
 npm run lint
-npm run format
 ```
 
 > Tip: set up your editor to run ESLint and Prettier on save.

@@ -1,0 +1,5 @@
+const GAME_IDS = Object.freeze(["prism-breaker", "vector-volley", "skyway-hopper", "clockwork-roost", "crystal-descent", "tower-rescue", "depthguard", "swarmline", "rockdrift", "horizon-rescue", "shield-command", "reactor-siege", "voxel-cascade", "maze-signal", "strata-shift", "cargo-circuit", "coil-runner", "prism-steps", "jetpack-foundry", "relic-canopy", "tunnel-pulse", "photon-trails", "orbital-pinball", "apex-circuit"]);
+const ENTRY_NAMES = Object.freeze(["index", ...GAME_IDS.map(id => `games/${id}`)]);
+const EXPECTED_PACKED_PATHS = Object.freeze(["LICENSE", "README.md", "package.json", ...ENTRY_NAMES.flatMap(name => ["js", "js.map", "cjs", "cjs.map", "d.ts", "d.cts"].map(ext => `dist/${name}.${ext}`))]);
+const EXPECTED_EXPORTS = Object.freeze(Object.fromEntries(ENTRY_NAMES.map(name => [name === "index" ? "." : `./${name}`, { types: `./dist/${name}.d.ts`, import: `./dist/${name}.js`, require: `./dist/${name}.cjs` }])));
+module.exports = { GAME_IDS, ENTRY_NAMES, EXPECTED_PACKED_PATHS, EXPECTED_EXPORTS };
