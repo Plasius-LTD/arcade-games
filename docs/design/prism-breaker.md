@@ -59,9 +59,12 @@ the host input adapter. Launch is one button bit with a rising-edge rule; holdin
 it cannot consume multiple lives or relaunch repeatedly. Unknown button bits
 and nonzero Z are rejected by the game-specific input boundary.
 
-The state retains each slot's target and previous button state, so sparse input
-events do not cause drift. A new pointer owner, cancellation, focus loss or key
-release must not leave a stale action pressed. Do not permit two pointers to
+The input adapter samples the current intention for each simulation tick. Missing
+tick input is neutral: the paddle stays at its current position instead of
+continuing towards an older target, and no launch occurs. Previous explicit
+button state is retained only to identify edges; a drain requires an explicit
+release before a fresh launch can be armed. A new pointer owner, cancellation,
+focus loss or key release must not leave a stale action pressed. Do not permit two pointers to
 silently compete for the same paddle. Pause/settings use semantic host controls,
 not undocumented input bits. All visible instructions come from the owning site
 translation bundle. Inputs never contain account identifiers or a score.
@@ -214,7 +217,7 @@ Online UI reports reconnect/leave instead of implying a client pauses the room.
 
 | Boundary | Required tests / evidence |
 | --- | --- |
-| Input | Equivalent touch/mouse/keyboard target sequences; launch edges; pointer cancellation; movement bound; invalid slots/axes/bits; left/right-handed controls |
+| Input | Equivalent touch/mouse/keyboard target sequences; launch edges and release-after-drain; neutral missing ticks; pointer cancellation; movement bound; invalid slots/axes/bits; left/right-handed controls |
 | Geometry | High-speed face/corner sweeps without tunnelling, separating time-zero contact, stable equal-hit order, bounded eight-contact handling, no shared-target double damage/score |
 | Rules | Genuine X/Y/Z target reach, steering speed bounds, armour/relay/gate/field transitions, drain/life handling, terminal immutability and safe score caps |
 | Content | Thirty distinct authored artifacts/objective routes, no intersecting or unreachable mandatory geometry, separate tutorial, all three real profiles and co-op/solo completion witnesses |
