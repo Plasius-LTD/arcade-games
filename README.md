@@ -9,6 +9,10 @@ Work: [Task #1](https://github.com/Plasius-LTD/arcade-games/issues/1),
 [Feature #2389](https://github.com/Plasius-LTD/plasius-ltd-site/issues/2389),
 [Epic #2382](https://github.com/Plasius-LTD/plasius-ltd-site/issues/2382).
 See [design](docs/design/catalogue-and-content.md).
+The [Prism Breaker implementation plan](docs/design/prism-breaker.md) defines
+the first game's rules, 30 challenge briefs and requirement-derived checks under
+[Task #2](https://github.com/Plasius-LTD/arcade-games/issues/2). It is preparation,
+not a playable export or completed qualification.
 
 ## Catalogue and entry loading
 

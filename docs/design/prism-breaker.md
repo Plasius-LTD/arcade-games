@@ -1,0 +1,233 @@
+# Prism Breaker implementation plan
+
+Prepared 17 November 2026. Work: [arcade-games #2](https://github.com/Plasius-LTD/arcade-games/issues/2),
+[site Story #2423](https://github.com/Plasius-LTD/plasius-ltd-site/issues/2423),
+[Feature #2391](https://github.com/Plasius-LTD/plasius-ltd-site/issues/2391),
+Epic #2382. This is the implementation/test plan, not evidence of a playable
+game, authored release artifacts, rights clearance or ten-hour human evaluation.
+
+The current manifest remains planned with null content/qualification and pending
+rights. `arcade.games.prism-breaker.enabled` was read back as disabled with 0%
+rollout. The host owns capabilities, pilot access and the full public launch
+barrier. Disabling new sessions preserves checkpoints and earned progress.
+
+## Package boundaries and delivery order
+
+Consume the approved releases of game-runtime and game-multiplayer before
+implementing the production integration. Do not add a workspace or tarball
+dependency as a substitute for publication. Existing package assessment:
+
+- `@plasius/game-runtime`: fixed 60 Hz ticks, ordered slot inputs, seeded random
+  stream, bounded snapshots, checkpoints, explicit migrations and lifecycle.
+- `@plasius/gpu-physics/collision` from 0.1.19: swept sphere/AABB queries and
+  kinematic integration. Reflection, target damage and paddle response are
+  game rules; geometry queries must not be reimplemented here.
+- `@plasius/gpu-renderer`: native WebGPU raster scene rendering, explicit GPU
+  completion and owned disposal. Reuse scene/GPU geometry and camera utilities;
+  add any missing generic primitive or projection capability in its owner.
+- `@plasius/game-multiplayer`: room roster, authority, reconnect and immutable
+  terminal result candidate. The site commits results and projects progress.
+- Existing Plasius audio packages: original cue playback through injected host
+  ports. No independent audio, persistence, authentication or network framework.
+
+Keep executable rules and presentation behind the existing Prism Breaker subpath.
+Root metadata loading must not import the game's engine or browser globals.
+Headless rules run identically on client and authority; presentation reads their
+snapshots. Preserve existing catalogue APIs and the exact reviewed package
+boundary when adding exports. ADR 0001 governs this package separation.
+
+## Spatial playfield and input
+
+Use world coordinates X horizontal, Y vertical and Z into the chamber. Initial
+arena bounds are X ±7, Y ±5, Z -13 to +14. A paddle moves in X/Y at Z -10;
+targets and barriers occupy distinct X/Y/Z volumes ahead of it. A ball can hit
+side, top, bottom and far walls, travel behind obstructions and return towards
+the player. The near boundary is the drain. These are actual spatial collisions,
+not depth offsets on a planar simulation.
+
+Start with a ball radius of 0.18 and a paddle half-size of 0.9 by 0.7. The ball
+begins attached to a paddle; explicit launch sends it into the chamber. Targets
+are axis-aligned boxes with stable IDs. The first implementation bounds a stage
+to 96 damageable targets, 12 barriers, four gravity fields and two paddles, with
+one live ball. Increase a bound only with measured performance and test evidence.
+
+`GameInput.axes.x/y` specify the desired normalised paddle centre; Z is zero.
+The game clamps position to the arena and limits travel speed per tick. Touch
+offers an absolute aiming region plus accessible directional nudge controls.
+Mouse maps to the same target plane; arrows/WASD update the same target through
+the host input adapter. Launch is one button bit with a rising-edge rule; holding
+it cannot consume multiple lives or relaunch repeatedly. Unknown button bits
+and nonzero Z are rejected by the game-specific input boundary.
+
+The state retains each slot's target and previous button state, so sparse input
+events do not cause drift. A new pointer owner, cancellation, focus loss or key
+release must not leave a stale action pressed. Do not permit two pointers to
+silently compete for the same paddle. Pause/settings use semantic host controls,
+not undocumented input bits. All visible instructions come from the owning site
+translation bundle. Inputs never contain account identifiers or a score.
+
+## Rules, response and bounds
+
+Integrate bounded gravity with the published kinematic function, then sweep the
+remaining displacement against walls, targets, barriers and paddles. Resolve the
+earliest contact; equal times use a stable object-ID order. Perform at most eight
+contacts per ball/tick. Ignore separating time-zero contact, apply a documented
+small separation bias after response and stop unused displacement when the bound
+is reached. No recursive solver or speed-dependent unbounded substeps.
+
+Reflect off ordinary surfaces. Returning paddle hits steer X/Y from the contact
+offset while maintaining a minimum forward Z component and bounded total speed;
+the central hit is predictable. No input can teleport a paddle to intercept a
+ball. Moving barriers use relative displacement with the same swept query and
+bounded speed. Overlapping initial geometry is an authoring error, not something
+to repair invisibly during play.
+
+Damage is applied at most once per target per tick, and score is awarded only
+for an actual state transition. Armoured targets visibly require two contacts.
+Relay targets can remove an explicitly linked barrier; their connections have
+shape/text cues as well as colour. Gravity fields have bounded local force and
+visible direction. Gates move on known tick periods with adequate open windows.
+All required targets must remain reachable; a decorative obstacle cannot make a
+stage impossible. Avoid endless nearly parallel trajectories with a documented
+minimum longitudinal speed, without secretly steering towards a target.
+
+A drain consumes one team life, resets combo and returns to an explicit ready
+state. Reaching the objective records one completion and enters a transition
+state; it does not automatically skip the summary. States are ready, playing,
+stage-complete, won and lost. Terminal states cannot score or mutate gameplay.
+Attempts, lives, score, stage time and combo have finite integer bounds. Pause
+belongs to runtime; frozen/elapsed real time never earns score or challenge credit.
+
+Solo has one paddle. Co-op has two host-issued slots, each controlling a paddle
+with the same physical travel bound. Equal-contact ownership is deterministic;
+one collision cannot award both slots a hit. Team targets, lives and completion
+are shared. Disconnection does not pause authority or silently replace a player;
+the host's existing reconnect/abandonment policy applies. Ranked solo also uses
+authority. Local practice scores cannot be promoted to verified results.
+
+## Thirty authored challenge briefs
+
+These are distinct authoring requirements. Each needs actual versioned geometry,
+objectives, validation and a unique content digest before it counts in the
+inventory. New colours, reordered IDs or a random seed do not create a distinct
+authored challenge. Names below are internal authoring labels, not final UI copy.
+
+| ID | Authored spatial problem | Required demonstration |
+| --- | --- | --- |
+| pb-01 | Three separated target clusters at near, middle and far depth | Read depth and deliberately reach each cluster |
+| pb-02 | Targets on opposite vertical corners with a clear central corridor | Aim in both paddle axes rather than sweep one line |
+| pb-03 | A staggered diagonal ladder across four depth planes | Use changing rebound angles to traverse the sequence |
+| pb-04 | Two side galleries around a solid central pier | Reach both galleries through bank shots |
+| pb-05 | Far targets behind an offset near screen with two broad apertures | Choose an aperture and redirect on the far wall |
+| pb-06 | Armoured anchor targets surrounded by single-hit targets | Maintain controlled repeat hits as sightlines change |
+| pb-07 | One upward field and a target shelf above its exit | Account for a predictable local deflection |
+| pb-08 | One downward field between vertically separated shelves | Route through or around the field for each shelf |
+| pb-09 | Left/right opposing fields separated in depth | Choose which field to cross and preserve a safe return |
+| pb-10 | Four target pockets around a broad field-free shaft | Alternate direct shots and influenced approaches |
+| pb-11 | A slow horizontal gate before two far clusters | Time a shot through a visible opening |
+| pb-12 | A vertical gate crossing a side-gallery entrance | Combine height aiming and the opening cycle |
+| pb-13 | Two gates with offset periods and a clear waiting chamber | Plan a multi-stage route without a permanently blocked path |
+| pb-14 | A moving gate plus an armoured far anchor | Re-enter the far volume on separate safe cycles |
+| pb-15 | Two relays open independent side chambers | Select and complete both spatial routes |
+| pb-16 | A near relay opens the route to a far relay and final cluster | Understand visible dependencies and route order |
+| pb-17 | Three relays at different heights open a central chamber | Use independent approaches rather than one repeated volley |
+| pb-18 | A relay removes a deflector, changing the best far-wall route | Adapt after a meaningful geometry change |
+| pb-19 | Upper and lower galleries share a central return channel | Keep returning trajectories within controllable reach |
+| pb-20 | An asymmetric corridor bends around two offset barriers | Use multiple surfaces while retaining a visible return |
+| pb-21 | Gravity changes entry angle to a periodically opened vault | Combine local force reading and timing |
+| pb-22 | A relay opens access to a field-controlled side vault | Sequence objectives and then adjust for local force |
+| pb-23 | Armoured targets sit on both sides of a moving screen | Alternate routes as openings and target health change |
+| pb-24 | Three depth chambers each require a different entry height | Change aiming strategy between authored chambers |
+| pb-25 | A broad central refuge offers a safe path around two fields | Choose between reliable and precise approaches |
+| pb-26 | An outer ring and a protected inner core share relay openings | Finish separate spatial objectives without trapping the ball |
+| pb-27 | Mirrored side rooms have different gate periods and relay links | Read each room independently; appearance does not imply timing |
+| pb-28 | A rising gallery and descending gallery converge on far targets | Select complementary routes in co-op or switch routes in solo |
+| pb-29 | Three linked vaults combine armour, a bounded field and one gate | Apply the learned mechanics through a visible dependency chain |
+| pb-30 | An original multi-chamber finale with two relays and changing sightlines | Sustain planning across distinct phases, with all routes validated |
+
+Every challenge supports solo and co-op without an objective requiring two
+simultaneous presses. Co-op adds shared interception and route coordination,
+not exclusive content that makes solo incomplete. The tutorial is separate from
+the thirty: aiming both axes, launch/return, depth cues, bank shots, armour,
+relays/fields and co-op responsibilities are introduced in short replayable steps.
+
+## Difficulty, endless and mastery
+
+Three named profiles begin with ball speeds of 7, 9 and 11 world units/second,
+five, four and three lives respectively, and corresponding paddle/field/gate
+budgets. These are initial tuning values, not validated fairness. Difficulty
+must change explicit decision demands and available recovery without hiding
+mechanics or defeating accessibility. Ranked partitions include profile and
+gameplay-affecting assists; visual-only preferences do not affect rank eligibility.
+
+Endless play composes validated authored room grammar, not arbitrary boxes.
+Each candidate is bounded by target/barrier/field counts, disjoint solids, an
+acyclic relay graph, reachable required targets, safe launch clearance and a
+minimum return/reaction interval. Limit candidate attempts and return a known
+validated fallback for that tier. Seed, selected rooms and random state must
+survive save/restore exactly. Do not publish endless-validation evidence until
+tests run the actual generator and rules, including adversarial seeds.
+
+Progression alternates banks, timing, relay dependencies and gravity choices;
+speed reaches a ceiling. Each cleared stage offers a checkpoint. Meaningful
+mastery includes all authored challenges, separate difficulty completion,
+controlled bank-shot goals, consecutive no-drain stages and co-op shared-hit
+goals. Prevent idle time, repeated checkpoint restore and duplicate terminal
+projection from awarding mastery again. The host owns account achievements.
+
+The intended depth combines distinct authored routes, mastery and varied endless
+decisions. No estimated duration or automated soak proves ten hours. Retain
+600 meaningful human-play minutes, predominantly touch, desktop parity and
+independent depth/variety review before the title's qualification can pass.
+
+## State, authority and presentation
+
+Parse a strict, versioned game-owned state: selected challenge/tier/profile,
+slot/paddle targets and button edges, ball position/velocity, target health,
+relay/barrier state, gate phase, bounded score/lives/combo, objectives and terminal
+state. Reject foreign IDs, nonfinite or out-of-range coordinates, impossible
+health/progress, duplicate IDs, illegal roster changes and future versions.
+Validate cross-field invariants, not just field types. Mutating a returned
+snapshot must not mutate live rules state. No migration exists until explicitly
+implemented and tested against a real prior version.
+
+Authority's terminal evaluator reads the actual final snapshot. It captures
+fixed game/rules/content/profile/assist partitions and team outcome; clients
+never supply final score or eligibility. Repeated finalisation returns the same
+candidate. Host transaction/outbox handling must not award progress twice.
+
+The native raster view provides clear object depth, paddle/ball contrast,
+projected return guidance and target-health/relay cues. Use original geometry
+and audio with recorded provenance. No copied layouts, classic sprite silhouettes
+or recordings. Pending working-title review remains separate from asset authorship.
+Sound events are bounded per tick and have visual equivalents. HUD/objectives,
+pause, launch, remaining lives and completion are semantic outside the canvas.
+
+Respect reduced motion, colour-independent cues, 44 CSS-pixel controls,
+handedness, orientation/safe areas, keyboard focus and non-drag controls. Device
+loss preserves an account-scoped checkpoint where permitted and disposes owned
+GPU resources; unsupported WebGPU is an explicit state, not a renderer fallback.
+Scene replacement and hidden solo tabs dispose/pause through existing lifecycle.
+Online UI reports reconnect/leave instead of implying a client pauses the room.
+
+## Requirement-derived verification before source implementation
+
+| Boundary | Required tests / evidence |
+| --- | --- |
+| Input | Equivalent touch/mouse/keyboard target sequences; launch edges; pointer cancellation; movement bound; invalid slots/axes/bits; left/right-handed controls |
+| Geometry | High-speed face/corner sweeps without tunnelling, separating time-zero contact, stable equal-hit order, bounded eight-contact handling, no shared-target double damage/score |
+| Rules | Genuine X/Y/Z target reach, steering speed bounds, armour/relay/gate/field transitions, drain/life handling, terminal immutability and safe score caps |
+| Content | Thirty distinct authored artifacts/objective routes, no intersecting or unreachable mandatory geometry, separate tutorial, all three real profiles and co-op/solo completion witnesses |
+| Generation | Fixed-seed replay, safe starts, solvable relay graph, reachable targets and reaction budget, bounded candidate attempts and known fallback; actual rule execution validates representative/adversarial seeds |
+| Checkpoints | Exact replay after restore, random/gate/button continuity, rejected foreign/future/impossible states, no implicit migration, account boundaries delegated to runtime/host |
+| Authority | Client score forgery rejection, roster identity, reconnect continuity, immutable result partitions, duplicate result/outbox projection and abandoned-match behavior |
+| Presentation | Native WebGPU on supported phone/tablet/desktop; visible depth/collisions; semantic HUD, non-drag controls, focus/reflow, colour/reduced-motion/audio alternatives; GPU loss/disposal |
+| Distribution | Root remains lazy; only selected game code loads; isolated ESM/CJS/strict type consumers; exact public inventory and rights evidence; released Plasius dependencies only |
+| Qualification | Human ten-hour record, independent depth review, real device/thermal/long-session evidence, 100-player authority/cost qualification and approved package/site CI/CD remain separate |
+
+All changed source must appear in combined LCOV and each coverage metric stay at
+least 80%. Verify types, lint, full build, dependency audit and packed consumers.
+Update README, Unreleased, translation ownership and original-rights records with
+the implemented behavior. No network request, per-frame telemetry, identity or
+raw input enters a public metric; game hooks hand bounded counts to host-owned
+analytics/NFR transport. Do not mark Task #2 complete from this plan alone.

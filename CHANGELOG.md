@@ -2,6 +2,9 @@
 
 ## [Unreleased]
 
+- Specify Prism Breaker's spatial rules, touch/desktop action contract, 30
+  distinct challenge briefs, fair endless composition and solo/co-op verification
+  plan before implementation; no game or qualification is claimed (#2).
 - Add all 24 stable original game manifests and independent lazy ESM/CJS subpaths,
   with every implementation and qualification explicitly pending (#1).
 - Add bounded schema validation for content, reviewed-evidence references and
