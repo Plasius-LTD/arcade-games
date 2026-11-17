@@ -1,0 +1,209 @@
+{
+  "name": "@plasius/arcade-games",
+  "version": "0.1.0",
+  "description": "Lazy original spatial arcade catalogue and versioned content contracts",
+  "type": "module",
+  "sideEffects": false,
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    },
+    "./games/prism-breaker": {
+      "types": "./dist/games/prism-breaker.d.ts",
+      "import": "./dist/games/prism-breaker.js",
+      "require": "./dist/games/prism-breaker.cjs"
+    },
+    "./games/vector-volley": {
+      "types": "./dist/games/vector-volley.d.ts",
+      "import": "./dist/games/vector-volley.js",
+      "require": "./dist/games/vector-volley.cjs"
+    },
+    "./games/skyway-hopper": {
+      "types": "./dist/games/skyway-hopper.d.ts",
+      "import": "./dist/games/skyway-hopper.js",
+      "require": "./dist/games/skyway-hopper.cjs"
+    },
+    "./games/clockwork-roost": {
+      "types": "./dist/games/clockwork-roost.d.ts",
+      "import": "./dist/games/clockwork-roost.js",
+      "require": "./dist/games/clockwork-roost.cjs"
+    },
+    "./games/crystal-descent": {
+      "types": "./dist/games/crystal-descent.d.ts",
+      "import": "./dist/games/crystal-descent.js",
+      "require": "./dist/games/crystal-descent.cjs"
+    },
+    "./games/tower-rescue": {
+      "types": "./dist/games/tower-rescue.d.ts",
+      "import": "./dist/games/tower-rescue.js",
+      "require": "./dist/games/tower-rescue.cjs"
+    },
+    "./games/depthguard": {
+      "types": "./dist/games/depthguard.d.ts",
+      "import": "./dist/games/depthguard.js",
+      "require": "./dist/games/depthguard.cjs"
+    },
+    "./games/swarmline": {
+      "types": "./dist/games/swarmline.d.ts",
+      "import": "./dist/games/swarmline.js",
+      "require": "./dist/games/swarmline.cjs"
+    },
+    "./games/rockdrift": {
+      "types": "./dist/games/rockdrift.d.ts",
+      "import": "./dist/games/rockdrift.js",
+      "require": "./dist/games/rockdrift.cjs"
+    },
+    "./games/horizon-rescue": {
+      "types": "./dist/games/horizon-rescue.d.ts",
+      "import": "./dist/games/horizon-rescue.js",
+      "require": "./dist/games/horizon-rescue.cjs"
+    },
+    "./games/shield-command": {
+      "types": "./dist/games/shield-command.d.ts",
+      "import": "./dist/games/shield-command.js",
+      "require": "./dist/games/shield-command.cjs"
+    },
+    "./games/reactor-siege": {
+      "types": "./dist/games/reactor-siege.d.ts",
+      "import": "./dist/games/reactor-siege.js",
+      "require": "./dist/games/reactor-siege.cjs"
+    },
+    "./games/voxel-cascade": {
+      "types": "./dist/games/voxel-cascade.d.ts",
+      "import": "./dist/games/voxel-cascade.js",
+      "require": "./dist/games/voxel-cascade.cjs"
+    },
+    "./games/maze-signal": {
+      "types": "./dist/games/maze-signal.d.ts",
+      "import": "./dist/games/maze-signal.js",
+      "require": "./dist/games/maze-signal.cjs"
+    },
+    "./games/strata-shift": {
+      "types": "./dist/games/strata-shift.d.ts",
+      "import": "./dist/games/strata-shift.js",
+      "require": "./dist/games/strata-shift.cjs"
+    },
+    "./games/cargo-circuit": {
+      "types": "./dist/games/cargo-circuit.d.ts",
+      "import": "./dist/games/cargo-circuit.js",
+      "require": "./dist/games/cargo-circuit.cjs"
+    },
+    "./games/coil-runner": {
+      "types": "./dist/games/coil-runner.d.ts",
+      "import": "./dist/games/coil-runner.js",
+      "require": "./dist/games/coil-runner.cjs"
+    },
+    "./games/prism-steps": {
+      "types": "./dist/games/prism-steps.d.ts",
+      "import": "./dist/games/prism-steps.js",
+      "require": "./dist/games/prism-steps.cjs"
+    },
+    "./games/jetpack-foundry": {
+      "types": "./dist/games/jetpack-foundry.d.ts",
+      "import": "./dist/games/jetpack-foundry.js",
+      "require": "./dist/games/jetpack-foundry.cjs"
+    },
+    "./games/relic-canopy": {
+      "types": "./dist/games/relic-canopy.d.ts",
+      "import": "./dist/games/relic-canopy.js",
+      "require": "./dist/games/relic-canopy.cjs"
+    },
+    "./games/tunnel-pulse": {
+      "types": "./dist/games/tunnel-pulse.d.ts",
+      "import": "./dist/games/tunnel-pulse.js",
+      "require": "./dist/games/tunnel-pulse.cjs"
+    },
+    "./games/photon-trails": {
+      "types": "./dist/games/photon-trails.d.ts",
+      "import": "./dist/games/photon-trails.js",
+      "require": "./dist/games/photon-trails.cjs"
+    },
+    "./games/orbital-pinball": {
+      "types": "./dist/games/orbital-pinball.d.ts",
+      "import": "./dist/games/orbital-pinball.js",
+      "require": "./dist/games/orbital-pinball.cjs"
+    },
+    "./games/apex-circuit": {
+      "types": "./dist/games/apex-circuit.d.ts",
+      "import": "./dist/games/apex-circuit.js",
+      "require": "./dist/games/apex-circuit.cjs"
+    }
+  },
+  "scripts": {
+    "build": "node scripts/build-package.mjs",
+    "test": "vitest run && npm run test:privacy",
+    "test:watch": "vitest",
+    "test:privacy": "node --experimental-test-coverage --test-coverage-include=scripts/private-artifact-policy.cjs --test-coverage-lines=80 --test-coverage-functions=80 --test-coverage-branches=80 --test-reporter=spec --test-reporter-destination=stdout --test-reporter=lcov --test-reporter-destination=.privacy-lcov.info --test tests/private-artifact-policy.test.cjs",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint . --max-warnings=0",
+    "audit:eslint": "npm run lint",
+    "audit:npm": "npm audit --audit-level=high --omit=dev",
+    "test:coverage": "vitest run --coverage && npm run test:privacy && node -e \"const fs = require('node:fs'); fs.appendFileSync('coverage/lcov.info', fs.readFileSync('.privacy-lcov.info'));\"",
+    "audit:test": "npm run test:coverage",
+    "privacy:check": "node scripts/verify-private-artifacts.cjs",
+    "pack:check": "npm run privacy:check && node scripts/verify-public-package.cjs",
+    "prepublishOnly": "npm run build && npm run pack:check"
+  },
+  "keywords": [
+    "plasius",
+    "arcade",
+    "games",
+    "catalogue",
+    "typescript"
+  ],
+  "author": "Plasius LTD <development@plasius.co.uk>",
+  "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Plasius-LTD/arcade-games.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Plasius-LTD/arcade-games/issues"
+  },
+  "homepage": "https://github.com/Plasius-LTD/arcade-games#readme",
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "@types/node": "^24.19.2",
+    "@typescript-eslint/eslint-plugin": "^8.64.0",
+    "@typescript-eslint/parser": "^8.64.0",
+    "@vitest/coverage-v8": "^4.1.10",
+    "eslint": "^10.7.0",
+    "globals": "^17.7.0",
+    "tsup": "^8.5.1",
+    "tsx": "^4.23.1",
+    "typescript": "^6.0.3",
+    "vitest": "^4.1.10"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "funding": [
+    {
+      "type": "patreon",
+      "url": "https://www.patreon.com/c/plasiusltd/membership"
+    },
+    {
+      "type": "github",
+      "url": "https://github.com/sponsors/Plasius-LTD"
+    }
+  ],
+  "overrides": {
+    "brace-expansion": "^5.0.9",
+    "esbuild": "^0.28.1",
+    "minimatch": "11.0.1"
+  },
+  "engines": {
+    "node": ">=24"
+  },
+  "dependencies": {
+    "@plasius/schema": "1.5.0"
+  }
+}

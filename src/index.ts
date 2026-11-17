@@ -1,0 +1,13 @@
+export { GAME_IDS, isGameId } from "./identities.js";
+export type { GameId, GameCategory } from "./identities.js";
+export { catalogue, loadGameEntry } from "./catalogue.js";
+export type { CatalogueDescriptor } from "./catalogue.js";
+export { parseManifest, MAX_MANIFEST_BYTES } from "./manifest.js";
+export type { GameManifest, GameMode, EvidenceReference } from "./manifest.js";
+export { parseContentInventory, MAX_CONTENT_BYTES } from "./content.js";
+export type { ContentBinding, ContentInventory, EndlessValidation } from "./content.js";
+export { parseQualification, inspectGameEvidence, MAX_QUALIFICATION_BYTES } from "./qualification.js";
+export type { GameQualification } from "./qualification.js";
+export { createEntryLoader, MAX_PENDING_IMPORTS } from "./loading.js";
+export type { LoadOptions, EntryLoadResult } from "./loading.js";
+export type { GameEntry } from "./entry.js";

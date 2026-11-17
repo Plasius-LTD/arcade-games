@@ -80,3 +80,25 @@ already in progress cannot be physically cancelled and late results are ignored.
 First publication remains held under game-runtime #3/site #2531 and the existing
 feedback qualification owner. No bootstrap credential, first release, game
 exposure or ten-hour playtest is authorized or claimed by this source task.
+
+## Local implementation evidence — 16 November 2026
+
+All 24 planned manifests and their independent lazy subpaths are implemented.
+No game rules, game assets or playable content is included. Published schema
+1.5.0 supplies validation. The full dependency audit reports zero vulnerabilities.
+The reviewed first-publication guard is unchanged; default-off preparation does
+not authorize credential creation or release.
+
+71 Vitest tests and 24 Node privacy tests pass, including actual ESM/CJS root
+bundle verification, per-title modes, missing evidence, imported-registry identity,
+deadline/cancellation and exact public inventory. Combined LCOV contains all 40
+source/tooling files, with no missing changed source; all source lines are covered
+and unchanged 80% gates pass. Types, lint, sequential full build, exact 153-path
+tarball verification and diff checks pass.
+
+`tests/consumer/entries.mjs` passes in an isolated npm tarball consumer for the
+root and all 24 ESM/CJS subpaths, including lazy boundaries, metadata parity,
+abort and explicit missing implementation/evidence. Strict NodeNext consumers
+import every subpath as both `.mts` and `.cts`, without skipping library checks.
+No browser/device/ten-hour playtest or cloud-service qualification is claimed.
+Protected source/main CI and approved registration/CD remain delivery gates.
