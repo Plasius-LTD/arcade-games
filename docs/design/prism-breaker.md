@@ -154,6 +154,30 @@ authority. Local practice scores cannot be promoted to verified results.
 
 ## Thirty authored challenge briefs
 
+### Private authored-geometry increment, 18 November
+
+Implement the thirty briefs below as individually specified, versioned stage
+definitions in the private Prism module. Each definition has explicit target
+coordinates, armour/relay links, barrier geometry/motion and local fields;
+helpers only construct boxes and records, never generate a campaign from seeds.
+The private reader validates and returns detached stages. Unknown challenge IDs
+fail rather than silently choosing another stage. Keep all geometry outside the
+public catalogue and package inventory until integration and qualification.
+
+Requirement tests precede the definitions: exactly thirty ordered identities;
+distinct geometry after removing names/IDs; stage-parser validity; declared
+mechanic progression matching the briefs; independent reader results; valid
+initial state and deterministic real-rule launch/restore for all profiles and
+solo/co-op. Add bounded geometric route checks and negative sealed-room fixtures
+to catch authoring errors. Such route checks establish clearance only: a
+collision-free route is not a controllable ball trajectory or a completion
+witness. Automated tests must not be labelled human play or ten-hour evidence.
+
+Record these as candidate authored artifacts, not completed content inventory.
+All three-profile solo/co-op completion witnesses, separate tutorial, endless
+generation, touch presentation, rights review and human depth review remain
+explicit delivery work. No qualification record changes in this increment.
+
 These are distinct authoring requirements. Each needs actual versioned geometry,
 objectives, validation and a unique content digest before it counts in the
 inventory. New colours, reordered IDs or a random seed do not create a distinct
