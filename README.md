@@ -106,3 +106,13 @@ progress. No environment override or catalogue readiness shortcut exists.
 
 Apache-2.0. Public legal templates are in `legal/`; private contributor records
 and private rights evidence must remain outside this repository/package.
+
+## Release notes
+
+Add meaningful changes under `Unreleased`; the approved release pipeline alone
+promotes versioned sections. Preparation and the merged-main check reuse
+Schema's dependency-free `scripts/release-changelog.mjs`, reject placeholder or
+empty release notes, and preserve published history on retries. See the
+[release-note design](docs/design/release-notes.md) for the template revision
+and validation contract. The first-registration and permanent OIDC handover
+remain governed by the [publication route](docs/design/first-publication.md).

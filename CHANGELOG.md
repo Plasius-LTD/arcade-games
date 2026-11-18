@@ -2,6 +2,9 @@
 
 ## [Unreleased]
 
+- Reuse Schema release-note preparation and validation, preserving authored
+  history and rejecting empty or placeholder release notes before publication.
+
 - Add all 24 stable original game manifests and independent lazy ESM/CJS subpaths,
   with every implementation and qualification explicitly pending (#1).
 - Add bounded schema validation for content, reviewed-evidence references and
