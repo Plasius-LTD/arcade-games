@@ -171,6 +171,7 @@
   "homepage": "https://github.com/Plasius-LTD/arcade-games#readme",
   "devDependencies": {
     "@eslint/js": "^10.0.1",
+    "@plasius/gpu-physics": "0.1.19",
     "@types/node": "^24.19.2",
     "@typescript-eslint/eslint-plugin": "^8.64.0",
     "@typescript-eslint/parser": "^8.64.0",

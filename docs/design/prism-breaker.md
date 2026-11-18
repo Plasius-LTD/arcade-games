@@ -11,6 +11,50 @@ rights. `arcade.games.prism-breaker.enabled` was read back as disabled with 0%
 rollout. The host owns capabilities, pilot access and the full public launch
 barrier. Disabling new sessions preserves checkpoints and earned progress.
 
+### Internal rules increment, 18 November
+
+Implement the deterministic game-owned rules privately before the host adapter.
+Tests call one fixed game tick with slot, normalized X/Y intention and a launch
+boolean; the released runtime adapter will later map validated `GameInput` into
+that narrow intention. This does not introduce another clock, event queue,
+browser input handler or random generator. Only published physics/schema are
+consumed. The core is not imported by a public entry or included in its bundle
+until runtime integration and public redistribution evidence are ready.
+
+The initial core supports one bounded stage, including armour, relay links,
+moving barriers, local forces, three explicit profiles and one/two paddles.
+It does not itself establish authored-content solvability, endless generation,
+account authority, presentation, device support or ten-hour depth. Stage-complete
+and lost states freeze. The future progression adapter owns summary/next-stage
+and campaign won transitions; it cannot silently reset terminal state.
+
+Rules detail for this increment:
+
+- Stage and state JSON are bounded to 64 KiB, with strict envelope/nested fields.
+  Stage IDs and target order bind a checkpoint to the factory's detached content;
+  the future runtime adds the immutable rules/content version binding.
+- The sorted first slot serves; either slot may request launch. Omitted inputs
+  preserve position and button-edge memory. Maximum paddle travel is 14 units/s
+  in Euclidean distance, including diagonals. Ready-state ball position follows
+  the serving paddle and stays outside its front face.
+- Ball speed is fixed at the profile's 7/9/11 units/s. Gravity changes direction
+  within that bound. Side/corner reflections retain a 20% minimum longitudinal
+  component, explicitly preserving its direction; no target seeking is used.
+- A nonfatal armour hit earns 25 points, destruction earns 100, and each target
+  can take damage only once in a tick. Restored score/hit totals must equal
+  target-health transitions. Combo resets on a drain. Completion/loss freeze.
+- Gates use an even 120–7200 tick triangular period with bounded displacement;
+  their full travel envelopes cannot intersect another solid. Relative sweeps
+  account for paddle/gate movement. At most eight contacts are resolved, with a
+  0.0001-unit separation bias; unused motion stops at the bound.
+- Structural state validation cannot authenticate a play history. Only the
+  host's trusted checkpoint/authority path can award progress; a shape-valid
+  local checkpoint must never become an authoritative score submission.
+
+The test-only stage fixtures are original geometric scenarios, not the thirty
+authored challenges or public rights evidence. Automated replay duration is
+regression coverage and provides no human play-depth qualification.
+
 ## Package boundaries and delivery order
 
 Consume the approved releases of game-runtime and game-multiplayer before
