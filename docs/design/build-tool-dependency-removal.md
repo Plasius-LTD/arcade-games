@@ -44,3 +44,11 @@ and release-note preparation remain unchanged. Publication and OIDC handover wai
 for the actual dependency-removal and site CI/CD prerequisites. Record each
 candidate's validation; no package, game or arcade launch is inferred from build
 tool replacement.
+
+Lockfile portability: use the Node 24.18.0/npm 11.19.1 client used by CI and
+its existing `--legacy-peer-deps` mode when generating and verifying the lock.
+The first catalogue CI run reproduced missing optional `@emnapi/core` and
+`@emnapi/runtime` WASI dependencies after the older local npm client pruned them.
+Regenerate through npm, then verify `npm ci --no-fund --no-audit
+--legacy-peer-deps` from the resulting lock. Do not hand-edit resolved packages
+or omit optional dependencies to mask a portability failure.
