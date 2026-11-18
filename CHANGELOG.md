@@ -2,6 +2,11 @@
 
 ## [Unreleased]
 
+- Add internal deterministic Prism Breaker stage rules, strict stage/checkpoint
+  validation and spatial collision/input regressions using released Plasius
+  physics. The engine is not exported or bundled; content, host integration and
+  human/device/rights qualification remain pending (#2).
+
 - Reuse Schema release-note preparation and validation, preserving authored
   history and rejecting empty or placeholder release notes before publication.
 

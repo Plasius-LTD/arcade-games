@@ -11,8 +11,12 @@ Work: [Task #1](https://github.com/Plasius-LTD/arcade-games/issues/1),
 See [design](docs/design/catalogue-and-content.md).
 The [Prism Breaker implementation plan](docs/design/prism-breaker.md) defines
 the first game's rules, 30 challenge briefs and requirement-derived checks under
-[Task #2](https://github.com/Plasius-LTD/arcade-games/issues/2). It is preparation,
-not a playable export or completed qualification.
+[Task #2](https://github.com/Plasius-LTD/arcade-games/issues/2). Its internal
+single-stage rules are tested in `src/games/prism/rules.ts`: two-axis solo/co-op
+paddles, spatial swept collisions, armour/relays, moving gates, local gravity,
+three difficulty profiles and detached replay state. They are excluded from
+public entries and bundles pending runtime integration and rights/content
+qualification. See [ADR 0002](docs/adrs/adr-0002-private-prism-rules.md).
 
 ## Catalogue and entry loading
 
@@ -98,6 +102,9 @@ The exact public tarball has 153 paths: root plus 24 ESM/CJS/map/declaration ent
 README, LICENSE and package metadata. Runtime validation uses published
 `@plasius/schema@1.5.0`; package and provider mechanics remain in their owning
 Plasius packages. No unreleased runtime workspace dependency is installed.
+Private rule tests use the published `@plasius/gpu-physics@0.1.19/collision`
+subpath; physics is a development dependency until an engine is publicly exported.
+No generic runtime, input queue or collision implementation is duplicated.
 
 See [ADR 0001](docs/adrs/adr-0001-lazy-catalogue-and-evidence.md),
 [TDR 0001](docs/tdrs/tdr-0001-content-and-loading-bounds.md),
