@@ -6,8 +6,18 @@ original-code/content/asset provenance, title clearance and redistribution revie
 before public package inclusion or launch. Private legal records stay outside
 this repository; manifests reference opaque approved records and digests only.
 
-No game implementation or game asset is present in this initial metadata package.
+No game implementation or game asset is present in the public metadata package.
 All rights reviews and all content/human/device/online qualifications are pending.
+
+Private Prism Breaker work under Task #2 now includes the single-stage rules and
+thirty candidate geometric layouts in `src/games/prism/`. The coordinates, room
+connections and challenge arrangements were authored for this project from its
+spatial design briefs; no classic level data, sprites, recordings or copied asset
+files were used. They remain excluded from public bundles and the exact package
+inventory. This provenance note is not title clearance, an approved rights
+record, a remake licence or a public-domain determination. Original audio and
+visual presentation have not yet been delivered, and the rights review stays
+pending before any public content release.
 
 | Stable identity | Provisional title | Rights record | Clearance |
 | --- | --- | --- | --- |

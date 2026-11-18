@@ -2,6 +2,12 @@
 
 ## [Unreleased]
 
+- Author thirty private Prism Breaker candidate layouts with relay chambers,
+  moving gates, armour and gravity fields. Add geometric clearance screening,
+  independent-geometry checks and actual rules launch/restore across all three
+  profiles in solo/co-op. Completion witnesses, public integration and human
+  qualification remain pending; no playable catalogue entry is claimed (#2).
+
 - Add internal deterministic Prism Breaker stage rules, strict stage/checkpoint
   validation and spatial collision/input regressions using released Plasius
   physics. The engine is not exported or bundled; content, host integration and

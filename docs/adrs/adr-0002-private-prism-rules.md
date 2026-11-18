@@ -36,3 +36,20 @@ increment supplies no authored challenge inventory, graphics, endless generator,
 online integration or human depth evidence. None of those gates is relaxed.
 `arcade.games.prism-breaker.enabled` and the complete public-launch barrier
 remain disabled; the unpublished core adds no capability or rollout override.
+
+The next increment adds thirty individually specified candidate stages in the
+same private module boundary. Box/room helpers construct geometry only; they do
+not generate campaign layouts or duplicate runtime randomness. Strict stage
+parsing returns detached content and fails on unknown identities. Public entries
+still do not import the rules or authored geometry, with real-bundle tests for
+both exclusions. A future content release needs reviewed immutable artifacts
+and an inventory; these private candidates do not populate that inventory.
+
+Test-only route screening uses the published swept-sphere query on a bounded
+one-unit grid. It conservatively treats a gate's entire travel envelope as solid,
+removes geometrically contacted targets and follows their relay links. Negative
+sealed/self-locked fixtures prevent trivial success. This detects some authoring
+errors but deliberately ignores actual paddle control, gravity, lives and gate
+timing; it is neither a ball-trajectory completion witness nor human evidence.
+Actual rules launch/restore tests separately cover all candidates in every
+profile with one/two slots. Solvability and fairness remain explicit later gates.

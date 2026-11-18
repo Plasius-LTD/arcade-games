@@ -16,6 +16,8 @@ it("keeps each real built ESM/CJS game import external to the root payload", () 
       for (const id of GAME_IDS) expect(bundle).toContain(`import("./games/${id}.js")`);
       expect(bundle).not.toContain("function plannedManifest");
       expect(bundle).not.toContain("createPrismRules");
+      expect(bundle).not.toContain("readPrismChallenge");
+      expect(bundle).not.toContain("vaults-door");
       expect(bundle).not.toContain("gpu-physics");
     }
   } finally { rmSync(output, { recursive: true, force: true }); }
@@ -28,6 +30,7 @@ it("keeps unqualified private game rules out of the actual Prism Breaker bundles
     for (const extension of ["js", "cjs", "d.ts", "d.cts"]) {
       const bundle = readFileSync(join(output, `prism-breaker.${extension}`), "utf8");
       expect(bundle).not.toContain("createPrismRules"); expect(bundle).not.toContain("gpu-physics");
+      expect(bundle).not.toContain("readPrismChallenge"); expect(bundle).not.toContain("vaults-door");
       expect(bundle).toContain("manifest");
     }
   } finally { rmSync(output, { recursive: true, force: true }); }

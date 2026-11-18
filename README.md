@@ -18,6 +18,15 @@ three difficulty profiles and detached replay state. They are excluded from
 public entries and bundles pending runtime integration and rights/content
 qualification. See [ADR 0002](docs/adrs/adr-0002-private-prism-rules.md).
 
+`src/games/prism/challenges.ts` now contains thirty individually authored candidate
+layouts, including sealed relay rooms, distinct gate cycles, armour and local
+fields. Private readers return strictly validated detached geometry. Tests check
+unique geometry independent of names, conservative sphere clearance and actual
+rules launch/restore for all profiles in solo/co-op. These checks do not establish
+controllable completion or human play depth. Tutorial, endless generation,
+presentation, runtime integration and qualification remain required; the candidate
+geometry is excluded from public entries and packed artifacts.
+
 ## Catalogue and entry loading
 
 ```ts
