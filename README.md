@@ -23,8 +23,11 @@ qualification. See [ADR 0002](docs/adrs/adr-0002-private-prism-rules.md).
 layouts, including sealed relay rooms, distinct gate cycles, armour and local
 fields. Private readers return strictly validated detached geometry. Tests check
 unique geometry independent of names, conservative sphere clearance and actual
-rules launch/restore for all profiles in solo/co-op. These checks do not establish
-controllable completion or human play depth. Tutorial, endless generation,
+rules launch/restore for all profiles in solo/co-op. A test-only pilot also supplies
+180 controlled completion witnesses through ordinary inputs, with content/input/
+final-state digests and identical outcomes after a mid-play JSON state round trip.
+Both paddles contribute in co-op. These are automated headless trajectories, not
+human fairness, touch usability or play-depth evidence. Tutorial, endless generation,
 presentation, runtime integration and qualification remain required; the candidate
 geometry is excluded from public entries and packed artifacts.
 
