@@ -178,6 +178,29 @@ All three-profile solo/co-op completion witnesses, separate tutorial, endless
 generation, touch presentation, rights review and human depth review remain
 explicit delivery work. No qualification record changes in this increment.
 
+### Controlled completion verification
+
+A test-only deterministic controller can now seek remaining targets through
+direct and wall-bank approaches. It submits only bounded ordinary paddle/launch
+intentions to the actual rules from their initial state; it cannot set the ball,
+health, score, lives or gate phase. Co-op routes assign the returning ball to a
+paddle by horizontal region and move its partner clear, with the same physical
+travel limits enforced by the rules. No game assistance is added to production.
+
+Convert this probe into regression witnesses for every authored candidate in
+all three profiles and solo/co-op. Bound each attempt to 36,000 ticks. Require
+all targets destroyed, the rules' terminal completion, derived correct score,
+remaining lives, both co-op paddles contributing, and immutable terminal state.
+Record content, intention-stream and final-state SHA-256 digests with simulated
+ticks. Repeat with a JSON state round trip during play and require identical
+digests/outcome. Tests exercise the actual rule step, not substituted collisions.
+
+These witnesses establish a particular controllable completion path under the
+headless rules. They do not establish human reaction fairness, touch usability,
+presentation, ten-hour depth, a runtime/account checkpoint or authority. The
+controller reads exact state and predicts bounces, so its timings are explicitly
+automated simulation, never human qualification. Keep the public inventory null.
+
 These are distinct authoring requirements. Each needs actual versioned geometry,
 objectives, validation and a unique content digest before it counts in the
 inventory. New colours, reordered IDs or a random seed do not create a distinct

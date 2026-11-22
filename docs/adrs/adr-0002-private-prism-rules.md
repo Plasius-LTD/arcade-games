@@ -53,3 +53,13 @@ errors but deliberately ignores actual paddle control, gravity, lives and gate
 timing; it is neither a ball-trajectory completion witness nor human evidence.
 Actual rules launch/restore tests separately cover all candidates in every
 profile with one/two slots. Solvability and fairness remain explicit later gates.
+
+Controlled completion witnesses now supplement the geometric check. A test-only
+pilot supplies legal intentions from initial state, and the real rule step alone
+updates gameplay. Every candidate/profile/roster must reach completion within
+36,000 ticks, retain lives, derive the correct score and have both co-op paddles
+contribute. Content, intention-stream and final-state hashes bind each witness;
+a mid-play state serialization round trip must reproduce it. Terminal gameplay
+must remain frozen. The pilot uses exact-state bounce prediction, so these are
+automated trajectory witnesses only. No public assist, human fairness/depth
+evidence, host checkpoint or authority proof is introduced.
