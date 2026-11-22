@@ -283,6 +283,51 @@ independent depth/variety review before the title's qualification can pass.
 
 ## State, authority and presentation
 
+### Private scene projection, 22 November
+
+Reuse the published `@plasius/gpu-shared/game-scene@1.11.2` contract and released
+`@plasius/gpu-renderer@0.2.69` for a private presentation increment. A game-owned
+factory prepares original chamber, target, paddle, ball, field and health-marker
+meshes and projects strictly admitted rule states into `GameSceneSnapshot` data.
+It owns no canvas, clock, input, GPU resource, network, checkpoint or authority.
+The shared adapter remains responsible for transforms, bounded GPU submission,
+resize, cancellation and disposal. Keep both dependencies development-only until
+the qualified public game entry is implemented through released runtime packages.
+
+Visual positions must come from the same arena, ball/paddle dimensions and gate
+position calculation used by collisions. Omit destroyed targets and relay-opened
+barriers; show remaining armour through one/two physical markers, and distinguish
+the co-op paddles by geometry as well as colour. Represent bounded gravity regions
+with open frames and direction arrows, not opaque boxes obscuring the ball.
+Use a perspective behind the paddle, fitted to a bounded viewport aspect ratio
+(0.4–3) with a 15% chamber margin. Open paddle frames keep the attached ball
+visible; one/two raised bars distinguish the slots without covering the centre.
+An original dark floor/backplate replaces the renderer's outdoor background in
+the visible game area. Side/ceiling boundaries remain open frames so they do not
+shadow every far target. These are authored game meshes, not a new renderer option.
+Map logical forward Z to native -Z, preserving X/Y, so increasing input X moves
+right on screen and the native directional light reaches the visible faces.
+Correct triangle winding/normals consistently with that reflection. Use static
+geometry and simulation time, with no extra camera shake, flashes or idle motion.
+
+Prepare at most 128 meshes and 120,000 vertices and keep expanded snapshots within
+the published adapter's instance/vertex limits, including the rule parser's
+maximum 96 targets, 12 barriers, four fields and two paddles. Return fresh owned
+mesh buffers and detached snapshot trees. Reject foreign/malformed state through
+the existing rule parser before projection; presentation cannot amend gameplay.
+The host will provide translated semantic HUD and instructions outside the
+canvas. This increment does not establish accessible controls or human/device
+qualification and remains outside every public bundle and content inventory.
+
+Requirement tests precede implementation: genuine X/Y/Z bounds, projection/input
+direction, outward normals and finite material channels; health, relay and moving
+gate transitions; profile-specific paddles; exact snapshot identity/time; detached
+inputs/outputs and rejection of foreign state; all authored stages/profiles/
+rosters and worst-case admitted geometry fit the shared limits. Exercise the
+published adapter with an injected renderer to inspect the actual expanded frame,
+and separately inspect a native browser frame. A stubbed adapter proves contract
+compatibility only; browser smoke is not phone performance or touch qualification.
+
 Parse a strict, versioned game-owned state: selected challenge/tier/profile,
 slot/paddle targets and button edges, ball position/velocity, target health,
 relay/barrier state, gate phase, bounded score/lives/combo, objectives and terminal

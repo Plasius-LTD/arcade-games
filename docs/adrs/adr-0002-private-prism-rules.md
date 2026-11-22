@@ -63,3 +63,21 @@ a mid-play state serialization round trip must reproduce it. Terminal gameplay
 must remain frozen. The pilot uses exact-state bounce prediction, so these are
 automated trajectory witnesses only. No public assist, human fairness/depth
 evidence, host checkpoint or authority proof is introduced.
+
+The private presentation increment uses the published gpu-shared 1.11.2
+`game-scene` contract and gpu-renderer 0.2.69. The game owns original mesh data
+and strict rule-state projection; the shared adapter owns validation, transforms,
+GPU work, resize and disposal. It introduces no competing animation loop, input,
+camera gesture handler or resource manager. Both packages stay development-only
+while the public entries exclude this code.
+
+Collision and presentation share frozen arena/ball/paddle dimensions and the
+same gate-position function, preserving the recorded gameplay trajectories.
+Projection admits state through the existing rules and returns detached scene
+trees. Logical forward maps to native -Z with corrected triangle winding, keeping
+input X rightward and lighting on visible faces. Camera fit accepts a bounded
+viewport ratio. Mesh preparation and expansion must fit the published adapter's
+limits even at maximum rule content. Real-adapter contract tests and a separate
+native browser smoke complement the headless rules. This does not establish a
+production host, full accessible presentation, physical-phone performance or
+human qualification; those gates remain unchanged.

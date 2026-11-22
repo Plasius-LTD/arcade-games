@@ -1,0 +1,25 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="icon" href="data:,"><title>Private Prism scene validation</title>
+<style>body{font:16px system-ui;background:#080e1c;color:#edf3ff;margin:24px}canvas{display:block;border:1px solid #354966;max-width:100%;margin:20px 0}button,select{min-height:44px;padding:10px;margin:4px;background:#203351;color:inherit;border:1px solid #6685b3;border-radius:6px}pre{white-space:pre-wrap;max-width:960px}</style></head><body>
+<h1>Private Prism scene validation</h1><p>Native raster preview of actual rule state. This is a development check, not the arcade or human/device qualification.</p>
+<label>Candidate <select id="stage"></select></label><button id="gate">Advance gates 150 ticks</button><button id="move">Move first paddle right/up</button><button id="launch">Launch and advance 60 ticks</button><button id="reset">Reset stage</button>
+<canvas width="960" height="540" aria-label="Three-dimensional Prism rule-state preview"></canvas><pre id="status" aria-live="polite">Loading native renderer…</pre>
+<script type="module">
+import { createGameSceneAdapter } from '@plasius/gpu-shared/game-scene';
+import { createPrismRules, PRISM_PROFILES, PRISM_WORLD } from '/src/games/prism/rules.ts';
+import { createPrismPresentation } from '/src/games/prism/presentation.ts';
+import { listPrismChallenges, readPrismChallenge } from '/src/games/prism/challenges.ts';
+const canvas=document.querySelector('canvas'), status=document.querySelector('#status'), select=document.querySelector('#stage');
+let adapter, rules, state, projection, busy=false;
+const ids=listPrismChallenges();
+for(const id of ids) select.add(new Option(id,id));
+async function draw(){adapter.offer(projection.project(state,canvas.width/canvas.height));await adapter.flush();status.textContent=JSON.stringify({stage:state.stageId,phase:state.phase,tick:state.tick,score:state.score,lives:state.lives,paddles:state.paddles.map(({x,y})=>({x,y})),presentation:adapter.getSnapshot()},null,2);}
+async function reset(){adapter?.destroy();const content=readPrismChallenge(select.value);rules=createPrismRules(content,['a','b'],'standard');state=rules.initialState();projection=createPrismPresentation(content,['a','b'],'standard');adapter=await createGameSceneAdapter({enabled:true,canvas,meshes:projection.readMeshes(),width:canvas.width,height:canvas.height});await draw();}
+async function run(action){if(busy)return;busy=true;const controls=document.querySelectorAll('button,select');controls.forEach(control=>control.disabled=true);try{await action();}catch(error){status.textContent='Native check failed: '+(error.code??error.message);console.error(status.textContent);}finally{busy=false;controls.forEach(control=>control.disabled=false);}}
+select.onchange=()=>run(reset);document.querySelector('#reset').onclick=()=>run(reset);
+document.querySelector('#gate').onclick=()=>run(async()=>{for(let i=0;i<150;i++)state=rules.step(state,[]);await draw();});
+document.querySelector('#move').onclick=()=>run(async()=>{for(let i=0;i<20;i++)state=rules.step(state,[{slot:'a',x:1,y:1,launch:false}]);await draw();});
+document.querySelector('#launch').onclick=()=>run(async()=>{const profile=PRISM_PROFILES.standard;state=rules.step(state,[{slot:'a',x:state.paddles[0].x/(PRISM_WORLD.maximum[0]-profile.paddleX),y:state.paddles[0].y/(PRISM_WORLD.maximum[1]-profile.paddleY),launch:true}]);for(let i=1;i<60;i++)state=rules.step(state,[]);await draw();});
+window.prismSmoke={async resize(width,height){adapter.destroy();canvas.style.width=width+'px';canvas.style.height=height+'px';adapter=await createGameSceneAdapter({enabled:true,canvas,meshes:projection.readMeshes(),width,height});await draw();},snapshot(){return {rule:structuredClone(state),scene:projection.project(state,canvas.width/canvas.height),presentation:adapter.getSnapshot()};},destroy(){adapter.destroy();return adapter.getSnapshot();}};
+window.addEventListener('pagehide',()=>adapter?.destroy(),{once:true});
+await run(reset);
+</script></body></html>
