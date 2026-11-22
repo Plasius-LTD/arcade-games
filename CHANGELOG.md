@@ -2,6 +2,10 @@
 
 ## [Unreleased]
 
+- Isolate each private Prism completion profile/roster into its own test so the
+  finale's six scenarios do not share one timeout. Retain all 180 witnesses,
+  restore/digest assertions, simulation bounds and coverage gates (#2).
+
 - Author thirty private Prism Breaker candidate layouts with relay chambers,
   moving gates, armour and gravity fields. Add geometric clearance screening,
   independent-geometry checks and 180 actual-rules controlled completion witnesses

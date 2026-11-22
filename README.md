@@ -25,6 +25,8 @@ unique geometry independent of names, conservative sphere clearance and actual
 rules launch/restore for all profiles in solo/co-op. A test-only pilot also supplies
 180 controlled completion witnesses through ordinary inputs, with content/input/
 final-state digests and identical outcomes after a mid-play JSON state round trip.
+Each profile/roster runs as a separate instrumented test with a two-minute limit
+and a 36,000-tick simulation bound, retaining the full 180-scenario matrix.
 Both paddles contribute in co-op. These are automated headless trajectories, not
 human fairness, touch usability or play-depth evidence. Tutorial, endless generation,
 presentation, runtime integration and qualification remain required; the candidate

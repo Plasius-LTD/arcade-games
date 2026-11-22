@@ -201,6 +201,13 @@ presentation, ten-hour depth, a runtime/account checkpoint or authority. The
 controller reads exact state and predicts bounces, so its timings are explicitly
 automated simulation, never human qualification. Keep the public inventory null.
 
+Run each of the 180 profile/roster combinations as its own instrumented test case,
+including its restore replay and digest assertions. Combining six independent
+scenarios into one test exhausted its two-minute limit on the CI runner for the
+finale, although the local suite passed. Preserve that two-minute per-case limit,
+the 36,000-tick simulation bound, the complete matrix and all coverage gates;
+isolate scenarios instead of changing the budgets or omitting instrumentation.
+
 These are distinct authoring requirements. Each needs actual versioned geometry,
 objectives, validation and a unique content digest before it counts in the
 inventory. New colours, reordered IDs or a random seed do not create a distinct
