@@ -15,9 +15,16 @@ connections and challenge arrangements were authored for this project from its
 spatial design briefs; no classic level data, sprites, recordings or copied asset
 files were used. They remain excluded from public bundles and the exact package
 inventory. This provenance note is not title clearance, an approved rights
-record, a remake licence or a public-domain determination. Original audio and
-visual presentation have not yet been delivered, and the rights review stays
-pending before any public content release.
+record, a remake licence or a public-domain determination.
+
+The private presentation increment authors its chamber, cuboids, faceted ball,
+open paddle frames, one/two-slot markings, relay diamond outlines, health markers
+and field frames/arrows directly in `src/games/prism/presentation.ts`. No imported
+artwork, classic silhouettes, textures or recordings are used. The published
+Plasius native renderer supplies lighting and GPU presentation. This records
+authorship of the candidate geometry only; it is not a rights approval. Original
+audio, public host presentation and the rights review remain pending before any
+public content release.
 
 | Stable identity | Provisional title | Rights record | Clearance |
 | --- | --- | --- | --- |

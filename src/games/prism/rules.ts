@@ -31,9 +31,14 @@ export interface PrismState {
   paddleHits: number[]; contacts: number;
 }
 
-const DT = 1 / 60, RADIUS = 0.18, PADDLE_Z = -10, SEPARATION = 0.0001;
+/** Shared game-owned geometry for collision and private scene projection. */
+export const PRISM_WORLD = Object.freeze({
+  minimum: Object.freeze([-7, -5, -13] as const), maximum: Object.freeze([7, 5, 14] as const),
+  tickSeconds: 1 / 60, ballRadius: 0.18, paddleZ: -10, paddleHalfDepth: 0.25,
+});
+const DT = PRISM_WORLD.tickSeconds, RADIUS = PRISM_WORLD.ballRadius, PADDLE_Z = PRISM_WORLD.paddleZ, SEPARATION = 0.0001;
 const MAX_TICK = 0x7fffffff, CONTACT_LIMIT = 8, MAX_BYTES = 64 * 1024;
-const ARENA_MIN: PrismVector = [-7, -5, -13], ARENA_MAX: PrismVector = [7, 5, 14];
+const ARENA_MIN = PRISM_WORLD.minimum, ARENA_MAX = PRISM_WORLD.maximum;
 const number = (min: number, max: number) => field.number().validator(n => Number.isFinite(n) && n >= min && n <= max);
 const vector = (min: number, max: number) => field.array(number(min, max)).min(3).max(3);
 const bounds = () => field.object({ min: vector(-14, 14), max: vector(-14, 14) });
@@ -90,7 +95,8 @@ function targetScore(target: PrismTarget, remaining: number) {
   return (target.health - remaining) * 25 + (remaining === 0 ? 75 : 0);
 }
 
-function atBarrier(barrier: PrismBarrier, tick: number): PrismBox {
+/** Position for an already validated barrier and rule tick; shared by collision and presentation. */
+export function prismBarrierAt(barrier: PrismBarrier, tick: number): PrismBox {
   if (!barrier.motion) return barrier.bounds;
   const { axis, travel, periodTicks, phaseTicks } = barrier.motion;
   const phase = ((tick + phaseTicks) % periodTicks) / periodTicks;
@@ -127,7 +133,7 @@ export function createPrismRules(rawStage: unknown, rawSlots: readonly string[],
     || !Object.hasOwn(PRISM_PROFILES, profileId)) throw new TypeError("invalid-prism-options");
   const slots = [...rawSlots].sort(), profile = PRISM_PROFILES[profileId];
   const xLimit = 7 - profile.paddleX, yLimit = 5 - profile.paddleY;
-  const attached = (paddle: PrismPaddle): PrismVector => [paddle.x, paddle.y, PADDLE_Z + 0.25 + RADIUS + SEPARATION];
+  const attached = (paddle: PrismPaddle): PrismVector => [paddle.x, paddle.y, PADDLE_Z + PRISM_WORLD.paddleHalfDepth + RADIUS + SEPARATION];
 
   function initialState(): PrismState {
     const paddles = slots.map((slot, index) => ({ slot, x: slots.length === 1 ? 0 : index ? 2 : -2, y: 0, pressed: false, armed: true }));
@@ -172,15 +178,15 @@ export function createPrismRules(rawStage: unknown, rawSlots: readonly string[],
     });
     stage.barriers.forEach((b, index) => {
       if (open.has(b.id)) return;
-      const before = atBarrier(b, state.tick - 1), after = atBarrier(b, state.tick);
+      const before = prismBarrierAt(b, state.tick - 1), after = prismBarrierAt(b, state.tick);
       const delta = add(after.min, before.min, -1);
       results.push({ id: `barrier-${b.id}`, kind: "barrier", bounds: { min: add(before.min, delta, elapsed), max: add(before.max, delta, elapsed) }, velocity: scale(delta, 1 / DT), index });
     });
     state.paddles.forEach((p, index) => {
       const before = previous[index]!, delta: PrismVector = [p.x - before.x, p.y - before.y, 0];
       const center: PrismVector = [before.x + delta[0] * elapsed, before.y + delta[1] * elapsed, PADDLE_Z];
-      results.push({ id: `paddle-${p.slot}`, kind: "paddle", bounds: { min: add(center, [-profile.paddleX, -profile.paddleY, -0.25]),
-        max: add(center, [profile.paddleX, profile.paddleY, 0.25]) }, velocity: scale(delta, 1 / DT), index });
+      results.push({ id: `paddle-${p.slot}`, kind: "paddle", bounds: { min: add(center, [-profile.paddleX, -profile.paddleY, -PRISM_WORLD.paddleHalfDepth]),
+        max: add(center, [profile.paddleX, profile.paddleY, PRISM_WORLD.paddleHalfDepth]) }, velocity: scale(delta, 1 / DT), index });
     });
     return results.sort(compareId);
   }

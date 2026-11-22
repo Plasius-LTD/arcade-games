@@ -33,6 +33,16 @@ human fairness, touch usability or play-depth evidence. Tutorial, endless genera
 presentation, runtime integration and qualification remain required; the candidate
 geometry is excluded from public entries and packed artifacts.
 
+`src/games/prism/presentation.ts` privately projects admitted rule state into the
+published `@plasius/gpu-shared/game-scene` contract. It authors original meshes
+for the chamber, targets, ball, open paddles, relay diamonds, armour markers and
+gravity frames/arrows. `readMeshes()` returns fresh buffers; `project(state,
+aspectRatio)` fits the camera to a 0.4–3 viewport ratio (default 16/9). It reuses
+collision dimensions and gate positions and owns no clock, input or renderer.
+Released gpu-shared 1.11.2 and gpu-renderer 0.2.69 remain development dependencies
+until public host integration. See the [native smoke procedure and limits](docs/design/prism-scene-validation.md).
+Browser snapshots are not touch/phone, accessibility or ten-hour qualification.
+
 ## Catalogue and entry loading
 
 ```ts
