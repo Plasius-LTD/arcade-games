@@ -80,9 +80,11 @@ already in progress cannot be physically cancelled and late results are ignored.
   public tarball and isolated ESM/CJS/NodeNext subpath consumers; docs, protected
   pushed/main CI and approved CD before claiming published delivery.
 
-First publication remains held under game-runtime #3/site #2531 and the existing
-feedback qualification owner. No bootstrap credential, first release, game
-exposure or ten-hour playtest is authorized or claimed by this source task.
+The owner approved the bounded first-publication route under game-runtime #3 and
+site #2531; the site policy has completed CD. Publication still requires the
+retained owner's published Picomatch replacement, the approved package CD path
+and credential/OIDC handover. This source task does not claim a published package,
+game exposure or ten-hour playtest and does not take over feedback qualification.
 
 ## Local implementation evidence — 16 November 2026
 

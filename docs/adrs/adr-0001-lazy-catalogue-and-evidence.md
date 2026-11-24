@@ -31,7 +31,7 @@ the full launch decision. No seeds, elapsed idle time or catalogue metadata can
 replace human depth/device/authority/rights qualification.
 
 The host evaluates stored `arcade.catalogue.enabled`, per-game/platform flags,
-`arcade.view`/`arcade.play` and the complete public launch barrier. All remain
+`arcade.view`/`arcade.play` and the approved batch's complete public launch barrier. All remain
 disabled. Rollback stops new admission while preserving saves and evidence.
 No local/environment authorization override is introduced.
 

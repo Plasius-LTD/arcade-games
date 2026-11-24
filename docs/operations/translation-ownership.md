@@ -21,5 +21,8 @@ belong to the shared workspace/site integration and device qualification.
 The backend evaluates capabilities and stored flags; the frontend consumes those
 decisions. The package neither fetches policy nor trusts environment overrides.
 Public unavailable states must reflect missing implementation/evidence. Disabling
-a title stops new admission without deleting saves. All 24 titles and their
-specified modes must qualify before the coordinated public launch.
+a title stops new admission without deleting saves. Every title and specified
+mode in an explicitly approved batch must qualify before that batch launches;
+unselected titles remain unavailable. See
+[ADR 0003](../adrs/adr-0003-qualified-release-batches.md) for the owner's
+24 November 2026 sequencing change and the host's exact selection/evidence duties.
