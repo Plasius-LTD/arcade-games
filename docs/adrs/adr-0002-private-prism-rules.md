@@ -3,6 +3,15 @@
 Status: accepted for implementation. Date: 18 November 2026.
 Task arcade-games #2; site Story #2423 / Feature #2391 / Epic #2382.
 
+The 24 November tutorial increment adds six independently authored private
+practice stages and stable instruction/objective keys. Existing strict rules and
+scene projection remain their only game/graphics implementation. No additional
+runtime, input framework, random generator or progression store is introduced.
+Actual completion/restore tests cover three profiles and solo/co-op; interactive
+lesson progression and human/device evaluation remain with the released host.
+The lessons do not count toward thirty campaign challenges and are not shipped
+through public entries before integration and qualification.
+
 The three arcade packages await first publication and the site awaits the
 published dependency replacement under site #2539. Rules development can proceed
 using released schema and physics without importing an unpublished runtime or

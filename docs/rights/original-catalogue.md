@@ -26,6 +26,14 @@ authorship of the candidate geometry only; it is not a rights approval. Original
 audio, public host presentation and the rights review remain pending before any
 public content release.
 
+The six practice arrangements in `src/games/prism/tutorial.ts` were authored for
+this project on 24 November 2026. They use enlarged cuboid targets, an original
+enclosed relay chamber, a moving gate and a local upward field, independent of
+the thirty campaign layouts. The proposed instruction text in translation
+ownership was written for those mechanics; no classic tutorial text or assets
+were copied. Host translation, title/similarity review and rights approval remain
+pending, and the tutorial stays outside public game entries.
+
 | Stable identity | Provisional title | Rights record | Clearance |
 | --- | --- | --- | --- |
 | `prism-breaker` | Prism Breaker | `rights-prism-breaker` | Pending |

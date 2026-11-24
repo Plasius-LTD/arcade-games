@@ -57,6 +57,32 @@ regression coverage and provides no human play-depth qualification.
 
 ## Package boundaries and delivery order
 
+### Guided tutorial content increment — 24 November 2026
+
+Author six private tutorial stages independently of the thirty campaign challenges:
+launch/return, two-axis depth aiming, wall banks around a pier, two-hit armour and
+a relay door, a moving gate, then a gentle local gravity field. Each has a stable
+lesson ID, instruction/objective translation keys, an explicit taught mechanic
+and strict detached stage geometry. They use the existing rules and published
+physics/scene projection; do not add another clock, input adapter, random stream
+or progression store. The future released-runtime host owns lesson selection,
+pause/retry/advance, semantic prompts, touch controls and saved tutorial progress.
+
+Requirements before implementation: exact six unique IDs and independent geometry;
+progressive mechanic structure, finite strict validation and key ownership;
+detached reads/unknown-ID rejection; all three profiles and solo/co-op can complete
+each lesson under ordinary bounded inputs with exact save/restore equality and
+unchanged terminal scoring. Project every lesson through the existing pure native
+scene mapper. Keep actual public bundles free of tutorial code and content until
+the host, rights and qualification gates are satisfied. These automated completion
+checks are regression evidence only; tutorial usability and ten-hour depth still
+need human/device evaluation. Tutorial stages do not count toward the thirty
+authored campaign challenges.
+
+The owner's first-batch instruction is governed by site ADR 0198: a selected
+qualified batch can launch before the other titles, while all Prism requirements
+remain. This increment does not mark Prism or its tutorial as publicly playable.
+
 Consume the approved releases of game-runtime and game-multiplayer before
 implementing the production integration. Do not add a workspace or tarball
 dependency as a substitute for publication. Existing package assessment:

@@ -1,6 +1,13 @@
 # @plasius/arcade-games
 
 Lazy catalogue and original spatial game content contracts for the Plasius arcade.
+
+Prism's private source now includes six original tutorial lessons, separate from
+its thirty authored campaign stages. Tests complete every lesson in all three
+profiles and solo/co-op using real bounded rule inputs, with exact save/restore
+equality and native scene projection. This is automated content evidence; the
+interactive tutorial host, touch prompts, translations and human/device review
+remain required. Tutorial code is excluded from all public package entries.
 This package is under development and unpublished. No game is playable or
 qualified by these catalogue records. The 24-title programme can launch in
 explicit qualified batches. Every selected game requires its complete implementation,
