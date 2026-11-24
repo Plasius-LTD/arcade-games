@@ -1,6 +1,13 @@
 # @plasius/arcade-games
 
 Lazy catalogue and original spatial game content contracts for the Plasius arcade.
+
+Prism's private source now includes six original tutorial lessons, separate from
+its thirty authored campaign stages. Tests complete every lesson in all three
+profiles and solo/co-op using real bounded rule inputs, with exact save/restore
+equality and native scene projection. This is automated content evidence; the
+interactive tutorial host, touch prompts, translations and human/device review
+remain required. Tutorial code is excluded from all public package entries.
 This package is under development and unpublished. No game is playable or
 qualified by these catalogue records. The 24-title programme can launch in
 explicit qualified batches. Every selected game requires its complete implementation,
@@ -10,6 +17,38 @@ Work: [Task #1](https://github.com/Plasius-LTD/arcade-games/issues/1),
 [Feature #2389](https://github.com/Plasius-LTD/plasius-ltd-site/issues/2389),
 [Epic #2382](https://github.com/Plasius-LTD/plasius-ltd-site/issues/2382).
 See [design](docs/design/catalogue-and-content.md).
+The [Prism Breaker implementation plan](docs/design/prism-breaker.md) defines
+the first game's rules, 30 challenge briefs and requirement-derived checks under
+[Task #2](https://github.com/Plasius-LTD/arcade-games/issues/2). Its internal
+single-stage rules are tested in `src/games/prism/rules.ts`: two-axis solo/co-op
+paddles, spatial swept collisions, armour/relays, moving gates, local gravity,
+three difficulty profiles and detached replay state. They are excluded from
+public entries and bundles pending runtime integration and rights/content
+qualification. See [ADR 0002](docs/adrs/adr-0002-private-prism-rules.md).
+
+`src/games/prism/challenges.ts` now contains thirty individually authored candidate
+layouts, including sealed relay rooms, distinct gate cycles, armour and local
+fields. Private readers return strictly validated detached geometry. Tests check
+unique geometry independent of names, conservative sphere clearance and actual
+rules launch/restore for all profiles in solo/co-op. A test-only pilot also supplies
+180 controlled completion witnesses through ordinary inputs, with content/input/
+final-state digests and identical outcomes after a mid-play JSON state round trip.
+Each profile/roster runs as a separate instrumented test with a two-minute limit
+and a 36,000-tick simulation bound, retaining the full 180-scenario matrix.
+Both paddles contribute in co-op. These are automated headless trajectories, not
+human fairness, touch usability or play-depth evidence. Tutorial, endless generation,
+presentation, runtime integration and qualification remain required; the candidate
+geometry is excluded from public entries and packed artifacts.
+
+`src/games/prism/presentation.ts` privately projects admitted rule state into the
+published `@plasius/gpu-shared/game-scene` contract. It authors original meshes
+for the chamber, targets, ball, open paddles, relay diamonds, armour markers and
+gravity frames/arrows. `readMeshes()` returns fresh buffers; `project(state,
+aspectRatio)` fits the camera to a 0.4–3 viewport ratio (default 16/9). It reuses
+collision dimensions and gate positions and owns no clock, input or renderer.
+Released gpu-shared 1.11.2 and gpu-renderer 0.2.69 remain development dependencies
+until public host integration. See the [native smoke procedure and limits](docs/design/prism-scene-validation.md).
+Browser snapshots are not touch/phone, accessibility or ten-hour qualification.
 
 ## Catalogue and entry loading
 
@@ -117,6 +156,9 @@ The exact public tarball has 153 paths: root plus 24 ESM/CJS/map/declaration ent
 README, LICENSE and package metadata. Runtime validation uses published
 `@plasius/schema@1.5.0`; package and provider mechanics remain in their owning
 Plasius packages. No unreleased runtime workspace dependency is installed.
+Private rule tests use the published `@plasius/gpu-physics@0.1.19/collision`
+subpath; physics is a development dependency until an engine is publicly exported.
+No generic runtime, input queue or collision implementation is duplicated.
 
 See [ADR 0001](docs/adrs/adr-0001-lazy-catalogue-and-evidence.md),
 [TDR 0001](docs/tdrs/tdr-0001-content-and-loading-bounds.md),
