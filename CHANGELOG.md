@@ -2,6 +2,10 @@
 
 ## [Unreleased]
 
+- Add strict version/artifact-bound release-batch parsing and structural
+  inspection for explicitly selected games, preserving every per-title evidence
+  requirement and reporting incomplete selections without granting access (#42).
+
 - Reuse Schema release-note preparation and validation, preserving authored
   history and rejecting empty or placeholder release notes before publication.
 

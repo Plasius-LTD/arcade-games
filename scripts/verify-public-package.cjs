@@ -124,7 +124,7 @@ function verifyPackageContents({ packageJson }, load = require) {
     throw new Error("Package dual-module exports are incorrect.");
   }
   const api = load(path.resolve(process.cwd(), "dist/index.cjs"));
-  for (const name of ["parseManifest", "parseContentInventory", "parseQualification", "inspectGameEvidence", "createEntryLoader", "loadGameEntry"]) {
+  for (const name of ["parseManifest", "parseContentInventory", "parseQualification", "inspectGameEvidence", "parseReleaseBatch", "inspectReleaseBatch", "createEntryLoader", "loadGameEntry"]) {
     if (typeof api[name] !== "function") throw new Error("Required catalogue export is missing.");
   }
   if (JSON.stringify(api.GAME_IDS) !== JSON.stringify(GAME_IDS)) throw new Error("Catalogue identities differ from public entry policy.");

@@ -2,6 +2,9 @@
 
 Work: arcade-games #1; site Story #2421, Feature #2389, Epic #2382.
 The approved product design is site `docs/Design/retro-arcade.md` and ADR 0192.
+The owner's 24 November first-batch direction is recorded in site ADR 0198 and
+[release-batches.md](release-batches.md): exact selected games may launch when
+fully qualified; all per-game gates remain and the full catalogue stays in scope.
 Live readback on 16 November 2026 confirms `arcade.catalogue.enabled` disabled
 with zero rollout. `arcade.view`, `arcade.play`, each game flag and the complete
 public launch barrier remain host-owned. This work does not enable any game.

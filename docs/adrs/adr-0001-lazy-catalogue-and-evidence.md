@@ -3,6 +3,11 @@
 Status: accepted for implementation. Date: 16 November 2026. Task #1;
 site Story #2421 / Feature #2389 / Epic #2382.
 
+The all-24 simultaneous public barrier is refined by
+[ADR 0003](adr-0003-qualified-release-batches.md), following the owner's
+24 November 2026 first-batch delivery instruction. Per-game evidence and all
+package/host authority boundaries below remain unchanged.
+
 Keep stable save/permalink identities separate from working display names. Publish
 one metadata-only root and independent statically enumerated game subpaths.
 Retain actual dynamic imports in both module formats; declaration/build output

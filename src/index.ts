@@ -8,6 +8,8 @@ export { parseContentInventory, MAX_CONTENT_BYTES } from "./content.js";
 export type { ContentBinding, ContentInventory, EndlessValidation } from "./content.js";
 export { parseQualification, inspectGameEvidence, MAX_QUALIFICATION_BYTES } from "./qualification.js";
 export type { GameQualification } from "./qualification.js";
+export { parseReleaseBatch, inspectReleaseBatch, MAX_RELEASE_BATCH_BYTES } from "./release-batch.js";
+export type { ReleaseBatch, ReleaseBatchInspection } from "./release-batch.js";
 export { createEntryLoader, MAX_PENDING_IMPORTS } from "./loading.js";
 export type { LoadOptions, EntryLoadResult } from "./loading.js";
 export type { GameEntry } from "./entry.js";

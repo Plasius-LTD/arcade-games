@@ -31,7 +31,7 @@ describe("independent public package and lazy build boundaries", () => {
     }
     expect(() => verifyPackageContents({ packageJson: { ...manifest, exports: {} } }, load)).toThrow();
     expect(() => verifyPackageContents({ packageJson: { ...manifest, name: "@plasius/other" } }, load)).toThrow();
-    for (const name of ["parseManifest", "parseContentInventory", "parseQualification", "inspectGameEvidence", "createEntryLoader", "loadGameEntry"]) {
+    for (const name of ["parseManifest", "parseContentInventory", "parseQualification", "inspectGameEvidence", "parseReleaseBatch", "inspectReleaseBatch", "createEntryLoader", "loadGameEntry"]) {
       expect(() => verifyPackageContents({ packageJson: manifest }, (path: string) => path.endsWith("/index.cjs") ? { ...root, [name]: undefined } : load(path))).toThrow();
     }
     expect(() => verifyPackageContents({ packageJson: manifest }, (path: string) => path.endsWith("/index.cjs") ? { ...root, GAME_IDS: [] } : load(path))).toThrow();
