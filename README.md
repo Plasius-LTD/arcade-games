@@ -152,6 +152,15 @@ first-registration route and operator authorization. Never publish locally.
 Commands: `npm ci`, `npm run typecheck`, `npm run lint`, `npm run test:coverage`,
 `npm run build`, `npm run pack:check`, `npm run audit:npm`. The independent-entry
 build is sequential to bound build resources and emit self-contained declarations.
+The first-party build script calls esbuild for JavaScript and
+`dts-bundle-generator` with the installed TypeScript compiler for declarations.
+It uses explicit public entry paths, preserves legal comments and source maps,
+and keeps runtime dependencies and lazy game imports external. See the
+[build-tool decision](docs/adrs/adr-0003-build-tool-dependency-removal.md).
+The installed-code regression checks the selected builders for embedded
+Picomatch as well as rejecting the former `tsup` dependency. Remaining external
+test-tool dependencies still require the published Plasius matcher replacement;
+this build migration alone does not clear the full dependency release gate.
 The exact public tarball has 153 paths: root plus 24 ESM/CJS/map/declaration entries,
 README, LICENSE and package metadata. Runtime validation uses published
 `@plasius/schema@1.5.0`; package and provider mechanics remain in their owning

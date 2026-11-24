@@ -31,6 +31,11 @@
   physics. The engine is not exported or bundled; content, host integration and
   human/device/rights qualification remain pending (#2).
 
+- Replace tsup's embedded Picomatch build dependency with direct esbuild and
+  TypeScript declaration generation, preserving all public entry formats, lazy
+  imports and the exact packed inventory; external test-tool removal remains
+  tracked separately (#33).
+
 - Reuse Schema release-note preparation and validation, preserving authored
   history and rejecting empty or placeholder release notes before publication.
 
