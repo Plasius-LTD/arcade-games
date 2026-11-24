@@ -2,6 +2,9 @@
 
 Work: arcade-games #1; site Story #2421, Feature #2389, Epic #2382.
 The approved product design is site `docs/Design/retro-arcade.md` and ADR 0192.
+The owner's 24 November first-batch direction is recorded in site ADR 0198 and
+[release-batches.md](release-batches.md): exact selected games may launch when
+fully qualified; all per-game gates remain and the full catalogue stays in scope.
 Live readback on 16 November 2026 confirms `arcade.catalogue.enabled` disabled
 with zero rollout. `arcade.view`, `arcade.play`, each game flag and the complete
 public launch barrier remain host-owned. This work does not enable any game.
@@ -77,9 +80,11 @@ already in progress cannot be physically cancelled and late results are ignored.
   public tarball and isolated ESM/CJS/NodeNext subpath consumers; docs, protected
   pushed/main CI and approved CD before claiming published delivery.
 
-First publication remains held under game-runtime #3/site #2531 and the existing
-feedback qualification owner. No bootstrap credential, first release, game
-exposure or ten-hour playtest is authorized or claimed by this source task.
+The owner approved the bounded first-publication route under game-runtime #3 and
+site #2531; the site policy has completed CD. Publication still requires the
+retained owner's published Picomatch replacement, the approved package CD path
+and credential/OIDC handover. This source task does not claim a published package,
+game exposure or ten-hour playtest and does not take over feedback qualification.
 
 ## Local implementation evidence — 16 November 2026
 

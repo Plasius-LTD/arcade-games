@@ -2,8 +2,9 @@
 
 Lazy catalogue and original spatial game content contracts for the Plasius arcade.
 This package is under development and unpublished. No game is playable or
-qualified by these catalogue records. All 24 game implementations, rights
-clearance and human/device/online evidence remain required before public launch.
+qualified by these catalogue records. The 24-title programme can launch in
+explicit qualified batches. Every selected game requires its complete implementation,
+rights clearance and human/device/online evidence before public admission.
 
 Work: [Task #1](https://github.com/Plasius-LTD/arcade-games/issues/1),
 [Feature #2389](https://github.com/Plasius-LTD/plasius-ltd-site/issues/2389),
@@ -79,6 +80,28 @@ gates. Idle time, repeated deaths, cosmetic changes and seed counts do not estab
 depth. Public packaging rejects implemented content without approved public
 redistribution evidence. Private/licensed assets cannot be added by broadening
 the package allowlist. See [rights register](docs/rights/original-catalogue.md).
+
+## Release batches
+
+`parseReleaseBatch` validates a detached `arcadeReleaseBatch` version `1.0.0`
+record within 16 KiB. Its `id` identifies the selection; `members` contains 1–24
+unique known game IDs, exact rules/content versions and implementation artifact
+IDs/digests. Empty, duplicate, unknown, future and malformed selections fail.
+
+`inspectReleaseBatch(batch, entries)` inspects exactly those selected entries.
+It returns `batchId`, batch-level `structuralGaps` and per-game gap lists in member
+order. Any incomplete game adds `incomplete-batch` at batch level; invalid,
+unexpected and duplicate entries also produce batch gaps. Missing entries and
+changed version/artifact bindings cannot reuse complete evidence. It never imports
+games, chooses a passing subset, enables controls or returns authorization.
+
+The host must authenticate the approved batch and current evidence, verify exact
+artifacts and apply stored master/platform/game flags and backend capabilities.
+Unselected titles remain unavailable. Every selected title retains all existing
+qualification requirements; a completed batch need not wait for the other titles.
+See [batch design](docs/design/release-batches.md) and
+[ADR 0003](docs/adrs/adr-0003-qualified-release-batches.md). Current catalogue
+entries remain planned and unqualified. Site consumption waits for approved CD.
 
 Use the schema template's Node/npm setup. Tests are derived from the Project
 acceptance criteria before implementation. Every source must appear in combined

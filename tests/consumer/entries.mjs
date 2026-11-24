@@ -7,6 +7,19 @@ const cjs = require("@plasius/arcade-games");
 assert.equal(api.catalogue.length, 24);
 assert.deepEqual(api.GAME_IDS, cjs.GAME_IDS);
 assert.equal(Object.keys(require.cache).some(path => path.includes("/arcade-games/dist/games/")), false);
+const proposed = { type: "arcadeReleaseBatch", version: "1.0.0", id: "consumer-fixture", members: [{
+  gameId: "prism-breaker", rulesVersion: "1.0.0", contentVersion: "1.0.0",
+  artifact: { id: "synthetic-artifact", sha256: "a".repeat(64) },
+}] };
+for (const root of [api, cjs]) {
+  assert.deepEqual(root.parseReleaseBatch(proposed), proposed);
+  const selected = await root.loadGameEntry("prism-breaker");
+  assert.equal(selected.status, "loaded");
+  const inspection = root.inspectReleaseBatch(proposed, [selected.entry]);
+  assert.deepEqual(inspection.structuralGaps, ["incomplete-batch"]);
+  assert.ok(inspection.games[0].structuralGaps.includes("implementation"));
+  assert.equal("authorized" in inspection, false);
+}
 for (const root of [new URL(import.meta.resolve("@plasius/arcade-games")), require.resolve("@plasius/arcade-games")]) {
   const source = readFileSync(root, "utf8");
   assert.equal(source.includes("// src/games/"), false);
