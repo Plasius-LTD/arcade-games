@@ -2,6 +2,11 @@
 
 ## [Unreleased]
 
+- Author six private Prism tutorial lessons with progressive launch, depth,
+  wall-bank, relay, gate and gravity practice, strict detached content and actual
+  completion/restore checks across all difficulty and solo/co-op combinations
+  (#2). Interactive host integration and human/device qualification remain pending.
+
 - Add private Prism state-to-scene projection with original spatial meshes,
   profile-sized open paddles, health/relay/field cues and viewport camera fitting.
   Reuse published Plasius game-scene/native raster APIs and the rules' geometry;
