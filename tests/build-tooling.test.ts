@@ -22,6 +22,26 @@ it("removes the builder that embeds an unreplaceable vulnerable Picomatch implem
   }
 });
 
+it("keeps qualification automation and its bundled matcher out of normal runtime installations", () => {
+  const lock = JSON.parse(readFileSync("package-lock.json", "utf8"));
+  expect(Object.keys(lock.packages).some(path => /(?:^|\/)node_modules\/playwright-core$/.test(path))).toBe(false);
+  expect(existsSync("node_modules/playwright-core")).toBe(false);
+  const shader = JSON.parse(readFileSync("node_modules/@plasius/gpu-shader/package.json", "utf8"));
+  expect(shader.dependencies).not.toHaveProperty("playwright-core");
+  expect(shader.optionalDependencies ?? {}).not.toHaveProperty("playwright-core");
+  expect(shader.peerDependenciesMeta["playwright-core"]).toEqual({ optional: true });
+  const files = readdirSync("node_modules", { recursive: true, withFileTypes: true })
+    .filter(entry => entry.isFile() && /\.(?:m?js|cjs|map)$/.test(entry.name));
+  for (const file of files) {
+    const path = join(file.parentPath, file.name);
+    // External Picomatch is still tracked for the published matcher replacement.
+    // This check detects embedded copies, which a resolver override cannot remove.
+    if (path.startsWith(join("node_modules", "picomatch") + "/")) continue;
+    expect(/picomatch\/lib\/(?:parse|picomatch)\.js|require_picomatch|analyzeRepeatedExtglob/.test(readFileSync(path, "utf8")),
+      `${path} contains embedded Picomatch`).toBe(false);
+  }
+});
+
 it("emits both formats and self-contained declarations without changing external or lazy boundaries", async () => {
   const output = mkdtempSync(join(tmpdir(), "arcade-build-contract-"));
   const compile = vi.fn(async () => {});

@@ -88,3 +88,29 @@ runtime/qualification dependency boundary in gpu-shader #49; retain real shader
 runner tests and consume its verified published fix before final arcade removal.
 External picomatch remains too. Do not claim complete removal from the builder
 change, omit optional dependencies, or suppress the installed-code finding.
+
+### Published shader adoption and clean-install repair
+
+gpu-shader 0.1.13 now has successful approved main CD (45469760973), exact
+registry/tarball/provenance/tag identity at
+`f153f329b11ee787f117fe9bd02f739f2ccabfdf`, and the unchanged 30-path public
+package policy. Adopt that released transitive version through the lock; its
+optional qualification peer keeps Playwright out of ordinary consumers while
+the owning shader package retains its real development/runner tests.
+
+A fresh npm 11.19.1 install exposed the missing required React peer for the
+already-pinned gpu-physics 0.1.19. Regenerating the lock adds React 19.3.1 without
+changing any other existing dependency version except the targeted shader fix.
+Run a genuinely clean install with ordinary peer/optional handling. Extend the
+installed-code regression across the dependency tree to catch bundled copies,
+while explicitly retaining the separate external matcher release hold. Preserve
+all 442 existing discoveries and the new dependency-boundary regression before
+adopting the retained owner's published glob release. No audit exception applies.
+
+Validation after adoption: 443 Vitest and 24 privacy cases, normal clean install,
+types/lint, full build, 153-path pack/privacy, isolated ESM/CJS and strict NodeNext
+consumers, and full audit pass. The original 442 discovery records retain their
+exact hash above; including the new installation boundary regression gives
+`d3c018979c75a1fcc57fdfc86eb2ee3d73eeff7510c813617338a8b4adc134bd`.
+Combined LCOV remains 1209/1264 lines, 745/776 branches and 250/251 functions.
+The installed source scan finds only the still-external Picomatch implementation.
