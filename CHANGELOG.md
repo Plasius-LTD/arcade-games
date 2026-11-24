@@ -2,6 +2,11 @@
 
 ## [Unreleased]
 
+- Consume released gpu-shader 0.1.13 to remove qualification-only Playwright
+  and its embedded matcher from normal arcade installs. Restore the required
+  physics React peer in the lock and scan all installed code for bundled copies;
+  external matcher replacement remains pending (#33).
+
 - Add strict version/artifact-bound release-batch parsing and structural
   inspection for explicitly selected games, preserving every per-title evidence
   requirement and reporting incomplete selections without granting access (#42).
@@ -30,6 +35,11 @@
   validation and spatial collision/input regressions using released Plasius
   physics. The engine is not exported or bundled; content, host integration and
   human/device/rights qualification remain pending (#2).
+
+- Replace tsup's embedded Picomatch build dependency with direct esbuild and
+  TypeScript declaration generation, preserving all public entry formats, lazy
+  imports and the exact packed inventory; external test-tool removal remains
+  tracked separately (#33).
 
 - Reuse Schema release-note preparation and validation, preserving authored
   history and rejecting empty or placeholder release notes before publication.
