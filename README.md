@@ -183,9 +183,13 @@ Picomatch as well as rejecting the former `tsup` dependency. The lock consumes
 released gpu-shader 0.1.13, whose qualification-only browser automation is an
 optional peer; normal installs no longer include Playwright's bundled matcher.
 The required React peer for pinned gpu-physics is included in the lock so a clean
-normal npm install succeeds. No optional or peer dependency is omitted. Remaining external
-test-tool dependencies still require the published Plasius matcher replacement;
-this build migration alone does not clear the full dependency release gate.
+normal npm install succeeds. No optional or peer dependency is omitted. Upstream
+`picomatch` imports now resolve to verified public `@plasius/glob@1.0.2` with its
+exact Minimatch 11.0.9 engine. The name is a compatibility alias; package identity,
+integrity and implementation remain Plasius. Full installed-code checks exclude
+no matcher directory. The adapter intentionally rejects `makeRe()`; custom Vite
+asset filters must use reviewed RegExp values rather than glob strings.
+Complete discovery, coverage, package consumers and ordinary CI/CD remain required.
 The exact public tarball has 153 paths: root plus 24 ESM/CJS/map/declaration entries,
 README, LICENSE and package metadata. Runtime validation uses published
 `@plasius/schema@1.5.0`; package and provider mechanics remain in their owning

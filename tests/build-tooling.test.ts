@@ -34,9 +34,6 @@ it("keeps qualification automation and its bundled matcher out of normal runtime
     .filter(entry => entry.isFile() && /\.(?:m?js|cjs|map)$/.test(entry.name));
   for (const file of files) {
     const path = join(file.parentPath, file.name);
-    // External Picomatch is still tracked for the published matcher replacement.
-    // This check detects embedded copies, which a resolver override cannot remove.
-    if (path.startsWith(join("node_modules", "picomatch") + "/")) continue;
     expect(/picomatch\/lib\/(?:parse|picomatch)\.js|require_picomatch|analyzeRepeatedExtglob/.test(readFileSync(path, "utf8")),
       `${path} contains embedded Picomatch`).toBe(false);
   }

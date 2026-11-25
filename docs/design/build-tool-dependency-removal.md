@@ -45,13 +45,15 @@ for the actual dependency-removal and site CI/CD prerequisites. Record each
 candidate's validation; no package, game or arcade launch is inferred from build
 tool replacement.
 
-Lockfile portability: use the Node 24.18.0/npm 11.19.1 client used by CI and
-its existing `--legacy-peer-deps` mode when generating and verifying the lock.
+Historical lockfile portability: the initial candidate used the Node
+24.18.0/npm 11.19.1 client and CI's then-existing `--legacy-peer-deps` mode.
 The first catalogue CI run reproduced missing optional `@emnapi/core` and
 `@emnapi/runtime` WASI dependencies after the older local npm client pruned them.
 Regenerate through npm, then verify `npm ci --no-fund --no-audit
 --legacy-peer-deps` from the resulting lock. Do not hand-edit resolved packages
-or omit optional dependencies to mask a portability failure.
+or omit optional dependencies to mask a portability failure. The current
+candidate uses ordinary peer and optional dependency resolution, as verified
+below; do not carry that historical install option into new validation.
 
 ## Current-main integration — 24 November 2026
 
@@ -114,3 +116,42 @@ exact hash above; including the new installation boundary regression gives
 `d3c018979c75a1fcc57fdfc86eb2ee3d73eeff7510c813617338a8b4adc134bd`.
 Combined LCOV remains 1209/1264 lines, 745/776 branches and 250/251 functions.
 The installed source scan finds only the still-external Picomatch implementation.
+
+### Verified public matcher adoption — 25 November 2026
+
+Approved Glob CD 45586343662 published 1.0.2 from immutable main
+`c345169a6bd3e23c754e6a3fa77191179660b2a7`. Independent verification checked the
+public eight-file tarball, SHA-512, exact source/workflow/run provenance, registry
+signatures/attestations and clean ESM/CJS callable/ignore/dot/scan behavior.
+
+The next candidate includes private endless/mastery content and 1,036 Vitest
+discoveries before this resolver change. Preserve every discovery when consuming
+`npm:@plasius/glob@1.0.2` and exact Minimatch 11.0.9. Add a regression requiring
+the actual Plasius identity/integrity at each upstream alias and rejecting any
+original package identity, original registry resolution or embedded implementation.
+Remove the previous external-package code-scan exclusion. The module specifier
+`picomatch` remains for upstream compatibility only; it cannot hide original code.
+The adapter's unsupported `makeRe()` remains an explicit error; no custom Vite
+asset glob filters are configured here.
+
+Require a normal clean install, complete tests/combined coverage, types/lint,
+build, exact private/public package boundaries, full audit and isolated dual
+module/strict TypeScript consumers. Preserve the existing owner's Schema release
+route when main advances. Package registration and product qualification are
+separate gates; public game entries remain planned and unqualified.
+
+Validation passed with 1,037 Vitest tests and 24 privacy tests. All 1,036 earlier
+discoveries are unchanged (SHA-256
+`f27a99da6330f51cadfd00394dbd2e9ed2a13d2ff0b8305a53bfd741fa957eba`);
+the added removal regression produces
+`7f0a38488dd5cd6aa9d7f854ff46b0ac6fdacb2139d4b094ff0405b2d16f403e`.
+Normal clean installation, the complete installed-code scan, types, lint, build,
+privacy/package checks and the full audit pass with zero findings. Combined LCOV
+contains 1,287/1,342 lines, 809/841 branches and 284/285 functions. Endless and
+mastery source are fully covered by lines/functions; mastery branches are 17/18.
+
+The packed package retains exactly 153 paths. All 150 public distribution files
+are byte-identical to verified PR #50; the new game implementation stays private.
+Isolated ESM/CJS consumers exercise the root and all 24 game entries, and strict
+NodeNext checks pass for both `.mts` and `.cts` consumers. Current-head CI and
+approved package registration/OIDC handover are still required.

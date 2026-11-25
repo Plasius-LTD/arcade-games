@@ -2,6 +2,10 @@
 
 ## [Unreleased]
 
+- Replace external Picomatch implementations with verified public Plasius Glob
+  1.0.2 and exact Minimatch 11.0.9. Enforce installed identity/integrity and scan
+  all installed code without the earlier external-package exclusion (#33).
+
 - Add private challenge mastery projection for distinct profile, clean and shared
   co-op clears, with bounded canonical facts, monotonic merges and duplicate/restore
   idempotency. Retain host authority, account transactions and pending bank/streak
