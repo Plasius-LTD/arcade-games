@@ -46,6 +46,23 @@ Choose pb-01 and pb-29; advance gates, move the first paddle right/up, and launc
 The controls use ordinary intentions and real rule ticks, without a second game
 clock or public runtime. The status panel reports rule and presentation state.
 
+The 24 November endless increment extends the same selector with all 96 finite
+room recipes. Select each family at tier 2 and reflected choices to inspect
+vault sightlines, moving-shutter reflection and local current arrows. These
+are direct recipe reads with the same ordinary tick controls, not a seeded
+runtime, interactive game host or new animation loop.
+
+The 24 November native desktop smoke rendered reflected tier-two bank, shutter,
+relay and current rooms. Ordinary movement/launch reached tick 80 for relay and
+current rooms, and gate advancement reached tick 150 for bank/shutter rooms;
+their reported renderer queues were empty with no adapter error. The current
+room also rendered after the interrupted browser-control session recovered.
+The attempted narrow-view helper check was interrupted before a result returned,
+so narrow-view state preservation, disposal and browser-log checks for this
+increment remain unverified. Far targets and current arrows need further
+readability assessment in the playable host. These observations do not qualify
+touch controls, physical devices, performance or human play depth.
+
 For a separate narrow view, call `await prismSmoke.resize(320, 560)` in that
 fixture's developer console. This test helper explicitly destroys and recreates
 the adapter at the new viewport, retaining rule state; it does not qualify a

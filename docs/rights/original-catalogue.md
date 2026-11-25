@@ -34,6 +34,14 @@ ownership was written for those mechanics; no classic tutorial text or assets
 were copied. Host translation, title/similarity review and rights approval remain
 pending, and the tutorial stays outside public game entries.
 
+The private endless room grammar in `src/games/prism/endless.ts` was authored
+for this project's two-axis spatial paddle rules on 24 November 2026. Its bank
+pier, moving shutter, relay vault, local currents and target formations use
+original bounded coordinates. Reflections and tiers derive only from that
+project-authored geometry. No classic layouts or imported audiovisual assets
+were used. This records candidate authorship, not approved title/similarity or
+redistribution clearance; public entries still exclude the implementation.
+
 | Stable identity | Provisional title | Rights record | Clearance |
 | --- | --- | --- | --- |
 | `prism-breaker` | Prism Breaker | `rights-prism-breaker` | Pending |

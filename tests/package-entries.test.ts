@@ -2,9 +2,11 @@ import { createRequire } from "node:module";
 import fs, { readFileSync } from "node:fs";
 import childProcess from "node:child_process";
 import Module from "node:module";
+import { tmpdir } from "node:os";
+import { join } from "node:path";
 import { beforeAll, describe, expect, it, vi } from "vitest";
 import * as root from "../src/index.js";
-// @ts-expect-error The JS build command is exercised through its injected process runner.
+// @ts-expect-error The JS build command is exercised through its injected entry builder.
 import { buildPackage } from "../scripts/build-package.mjs";
 const require = createRequire(import.meta.url);
 const pack = vi.spyOn(childProcess, "execFileSync");
@@ -46,14 +48,15 @@ describe("independent public package and lazy build boundaries", () => {
     }
   });
 
-  it("builds self-contained entries sequentially and fails immediately on a broken build", () => {
-    const run = vi.fn(); buildPackage(run);
-    expect(run).toHaveBeenCalledTimes(25);
-    expect(run.mock.calls[0]![1]).toContain("--clean");
-    expect(run.mock.calls.slice(1).every(call => !call[1].includes("--clean"))).toBe(true);
-    expect(run.mock.calls.map(call => call[1][1])).toEqual(ENTRY_NAMES.map((name: string) => `src/${name}.ts`));
-    const failed = vi.fn(() => { throw new Error("build-failure"); });
-    expect(() => buildPackage(failed)).toThrow("build-failure"); expect(failed).toHaveBeenCalledOnce();
+  it("builds self-contained entries sequentially and fails immediately on a broken build", async () => {
+    const output = fs.mkdtempSync(join(tmpdir(), "arcade-build-order-"));
+    try {
+      const run = vi.fn(); await buildPackage(run, { outDir: output });
+      expect(run).toHaveBeenCalledTimes(25);
+      expect(run.mock.calls.map(call => call[0])).toEqual(ENTRY_NAMES);
+      const failed = vi.fn(() => { throw new Error("build-failure"); });
+      await expect(buildPackage(failed, { outDir: output })).rejects.toThrow("build-failure"); expect(failed).toHaveBeenCalledOnce();
+    } finally { fs.rmSync(output, { recursive: true, force: true }); }
   });
 
   it("checks the actual npm inventory and module loading, suppressing process diagnostics on failure", () => {

@@ -280,6 +280,80 @@ relays/fields and co-op responsibilities are introduced in short replayable step
 
 ## Difficulty, endless and mastery
 
+### Private challenge mastery projection, 25 November
+
+Add game-owned pure mastery rules for authored challenge completions. Existing
+`@plasius/player-system` provides achievement read models, not achievement rule
+execution; the shared runtime owns checkpoints and the future host owns account
+transactions. Reuse the current challenge reader, strict Schema validation and
+Prism terminal-state parser. Do not add storage, a ledger, clock, authentication,
+an achievement framework or a dependency on an unpublished package.
+
+Keep at most one record for each of 30 challenge IDs, three profiles and solo or
+co-op (180 records). Each record contains only the bound identity, no-drain flag
+and two-player contribution flag. Canonical records are detached, strictly
+validated and sorted. Repeated completion merges these flags monotonically;
+duplicate terminal projection or JSON restore produces no new unlock. A worse
+attempt cannot erase a better result. Unknown/tutorial/endless stages, malformed
+records and non-complete rule states cannot grant challenge mastery.
+
+Define six goals: all 30 challenges in each of the three profiles; all 30 without
+a drain in any profile; all 30 in co-op with both paddles contributing; and all
+90 challenge/profile pairs. Solo/co-op records for the same challenge/profile
+count once for profile goals. Goals carry stable instruction keys, finite current
+and target counts, and return fresh data for the future host presentation.
+
+Before source, test empty/partial/full progress, strict malformed/duplicate
+rejection, deterministic ordering, detached output, per-profile isolation,
+monotonic merging, duplicate/restore idempotency, terminal-state binding and
+actual rules completion in every profile/roster. Preserve all prior completion
+witnesses, game behavior and real bundle exclusion. No elapsed/idle duration can
+advance a goal because these rules contain no timer or duration counter.
+
+This is a projection from host-trusted outcomes, not authentication of their
+history. The host must apply it to its current progress within its existing
+conditional/idempotent transaction boundary, never to client-submitted progress
+or a restored local copy. Separate bank-shot and consecutive-clear goals need
+additional rule/sequence evidence; they remain required follow-up work. Account
+achievement delivery, playable host integration and human/device qualification
+remain pending, with public entries and rollout flags unchanged.
+
+### Private endless room grammar, 24 November
+
+Implement a bounded room composer independently of the unpublished runtime.
+The caller supplies the runtime's `next()` random draw; this package must not
+implement or import another random stream. The future released-runtime adapter
+owns seed/state checkpointing. A strict versioned recipe records round and
+choice, reconstructing exact detached geometry without drawing again.
+
+Rotate four authored room families: banks, timed shutters, relay vaults and local
+currents. Three bounded tiers add targets, armour and spatial decisions; speed
+continues to use the existing capped profiles. Two authored formations and both
+axis reflections vary each family/tier without arbitrary object placement.
+Reflect moving-gate bounds, phase and field forces consistently. Keep every
+solid at least six units forward of the paddle face, with no geometry in the
+launch/return zone. The shortest possible paddle-to-solid round trip at expert
+speed must exceed one second. This geometric budget is not human reaction or
+touch qualification.
+
+Avoid the most recent four recipe keys with at most four random draws, then
+choose the first nonrecent admitted recipe. Invalid draws or malformed history
+fail explicitly. The finite grammar always has a fallback; no retry loop, seed
+count, arbitrary collision rejection or regenerated checkpoint is acceptable.
+Keep stage bounds, relay links and gate travel within the existing parser's
+limits. Recipe/history validation must reject foreign or future identities,
+extra fields, invalid rounds/choices, oversized or duplicate history.
+
+Requirements precede source: deterministic recipe reconstruction; all 96
+family/tier/formation/reflection combinations strictly valid and distinct;
+bounded anti-repeat fallback; malformed entropy/input rejection; detached data;
+safe launch/return clearance; every finite room completed using actual rules
+under all three profiles and solo/co-op, with exact mid-play restore and native
+scene projection. Preserve existing campaign/tutorial witnesses and real public
+bundle exclusion. These are private automated witnesses, not seeded-runtime,
+human depth, fairness, rights, device or public release qualification. Mastery,
+host progression and account/online integration remain separate requirements.
+
 Three named profiles begin with ball speeds of 7, 9 and 11 world units/second,
 five, four and three lives respectively, and corresponding paddle/field/gate
 budgets. These are initial tuning values, not validated fairness. Difficulty

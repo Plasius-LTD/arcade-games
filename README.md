@@ -36,9 +36,10 @@ final-state digests and identical outcomes after a mid-play JSON state round tri
 Each profile/roster runs as a separate instrumented test with a two-minute limit
 and a 36,000-tick simulation bound, retaining the full 180-scenario matrix.
 Both paddles contribute in co-op. These are automated headless trajectories, not
-human fairness, touch usability or play-depth evidence. Tutorial, endless generation,
-presentation, runtime integration and qualification remain required; the candidate
-geometry is excluded from public entries and packed artifacts.
+human fairness, touch usability or play-depth evidence. The private tutorial,
+endless rooms and scene projector are described below; released-runtime host
+integration and qualification remain required. Candidate geometry is excluded
+from public entries and packed artifacts.
 
 `src/games/prism/presentation.ts` privately projects admitted rule state into the
 published `@plasius/gpu-shared/game-scene` contract. It authors original meshes
@@ -49,6 +50,26 @@ collision dimensions and gate positions and owns no clock, input or renderer.
 Released gpu-shared 1.11.2 and gpu-renderer 0.2.69 remain development dependencies
 until public host integration. See the [native smoke procedure and limits](docs/design/prism-scene-validation.md).
 Browser snapshots are not touch/phone, accessibility or ten-hour qualification.
+
+The private `src/games/prism/endless.ts` composes bounded original bank, shutter,
+relay-vault and current rooms. Three capped tiers, two formations and X/Y
+reflections yield 96 finite geometry combinations. Strict recipes reconstruct
+the same detached room without drawing again. Selection consumes caller-owned
+randomness, avoids the last four recipe keys, and uses a known admitted fallback
+after four draws. It adds no PRNG, clock or checkpoint store. Real-rule tests
+exercise every combination in all profiles and solo/co-op, including mid-play
+restore; these are automated regression checks, not human depth or fairness
+evidence. Runtime seed checkpoints, mastery, host progression and qualification
+remain required before public game integration. Public entries exclude this code.
+
+The private `src/games/prism/mastery.ts` projects six challenge objectives from
+host-trusted completions: each profile's campaign, clean clears, shared co-op
+clears and all challenge/profile pairs. Strict canonical facts are bounded to
+180 records; repeated or worse outcomes cannot repeat an unlock or reduce earned
+progress. The module has no storage or timer. The future host must authenticate
+outcomes and apply the projection to current account state transactionally.
+Bank-shot and consecutive-clear goals, account award integration and human
+qualification remain pending. Public entries exclude this private module.
 
 ## Catalogue and entry loading
 
@@ -152,6 +173,23 @@ first-registration route and operator authorization. Never publish locally.
 Commands: `npm ci`, `npm run typecheck`, `npm run lint`, `npm run test:coverage`,
 `npm run build`, `npm run pack:check`, `npm run audit:npm`. The independent-entry
 build is sequential to bound build resources and emit self-contained declarations.
+The first-party build script calls esbuild for JavaScript and
+`dts-bundle-generator` with the installed TypeScript compiler for declarations.
+It uses explicit public entry paths, preserves legal comments and source maps,
+and keeps runtime dependencies and lazy game imports external. See the
+[build-tool decision](docs/adrs/adr-0005-build-tool-dependency-removal.md).
+The installed-code regression checks the full installation for embedded
+Picomatch as well as rejecting the former `tsup` dependency. The lock consumes
+released gpu-shader 0.1.13, whose qualification-only browser automation is an
+optional peer; normal installs no longer include Playwright's bundled matcher.
+The required React peer for pinned gpu-physics is included in the lock so a clean
+normal npm install succeeds. No optional or peer dependency is omitted. Upstream
+`picomatch` imports now resolve to verified public `@plasius/glob@1.0.2` with its
+exact Minimatch 11.0.9 engine. The name is a compatibility alias; package identity,
+integrity and implementation remain Plasius. Full installed-code checks exclude
+no matcher directory. The adapter intentionally rejects `makeRe()`; custom Vite
+asset filters must use reviewed RegExp values rather than glob strings.
+Complete discovery, coverage, package consumers and ordinary CI/CD remain required.
 The exact public tarball has 153 paths: root plus 24 ESM/CJS/map/declaration entries,
 README, LICENSE and package metadata. Runtime validation uses published
 `@plasius/schema@1.5.0`; package and provider mechanics remain in their owning
