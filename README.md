@@ -177,7 +177,7 @@ The first-party build script calls esbuild for JavaScript and
 `dts-bundle-generator` with the installed TypeScript compiler for declarations.
 It uses explicit public entry paths, preserves legal comments and source maps,
 and keeps runtime dependencies and lazy game imports external. See the
-[build-tool decision](docs/adrs/adr-0003-build-tool-dependency-removal.md).
+[build-tool decision](docs/adrs/adr-0005-build-tool-dependency-removal.md).
 The installed-code regression checks the full installation for embedded
 Picomatch as well as rejecting the former `tsup` dependency. The lock consumes
 released gpu-shader 0.1.13, whose qualification-only browser automation is an
@@ -219,3 +219,14 @@ empty release notes, and preserve published history on retries. See the
 [release-note design](docs/design/release-notes.md) for the template revision
 and validation contract. The first-registration and permanent OIDC handover
 remain governed by the [publication route](docs/design/first-publication.md).
+
+## Package registration and trusted publishing
+
+The release workflow follows the shared `@plasius/schema` template. The reviewed
+enrollment allows only `@plasius/arcade-games@0.1.0` through main `cd.yml` and the
+`production` environment, using the standard temporary `NPM_TOKEN`. The default
+release path remains OIDC. No package-specific secret is introduced. See the
+[registration design](docs/design/shared-first-registration.md) and
+[ADR 0004](docs/adrs/adr-0004-shared-schema-registration.md) for exact admission, credential cleanup
+and the verified OIDC handover. Publication remains incomplete until CD and npm
+registry integrity are verified.

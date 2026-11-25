@@ -22,6 +22,9 @@
   physics React peer in the lock and scan all installed code for bundled copies;
   external matcher replacement remains pending (#33).
 
+- Adopt the shared Schema first-registration template with the standard temporary
+  `NPM_TOKEN`, exact enrollment and subsequent tokenless OIDC handover (#47).
+
 - Add strict version/artifact-bound release-batch parsing and structural
   inspection for explicitly selected games, preserving every per-title evidence
   requirement and reporting incomplete selections without granting access (#42).

@@ -1,4 +1,4 @@
-# ADR 0003: Direct JavaScript and declaration builds
+# ADR 0005: Direct JavaScript and declaration builds
 
 Status: Accepted for the candidate build migration; publication gates remain open.
 
