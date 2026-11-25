@@ -36,9 +36,10 @@ final-state digests and identical outcomes after a mid-play JSON state round tri
 Each profile/roster runs as a separate instrumented test with a two-minute limit
 and a 36,000-tick simulation bound, retaining the full 180-scenario matrix.
 Both paddles contribute in co-op. These are automated headless trajectories, not
-human fairness, touch usability or play-depth evidence. Tutorial, endless generation,
-presentation, runtime integration and qualification remain required; the candidate
-geometry is excluded from public entries and packed artifacts.
+human fairness, touch usability or play-depth evidence. The private tutorial,
+endless rooms and scene projector are described below; released-runtime host
+integration and qualification remain required. Candidate geometry is excluded
+from public entries and packed artifacts.
 
 `src/games/prism/presentation.ts` privately projects admitted rule state into the
 published `@plasius/gpu-shared/game-scene` contract. It authors original meshes
@@ -49,6 +50,17 @@ collision dimensions and gate positions and owns no clock, input or renderer.
 Released gpu-shared 1.11.2 and gpu-renderer 0.2.69 remain development dependencies
 until public host integration. See the [native smoke procedure and limits](docs/design/prism-scene-validation.md).
 Browser snapshots are not touch/phone, accessibility or ten-hour qualification.
+
+The private `src/games/prism/endless.ts` composes bounded original bank, shutter,
+relay-vault and current rooms. Three capped tiers, two formations and X/Y
+reflections yield 96 finite geometry combinations. Strict recipes reconstruct
+the same detached room without drawing again. Selection consumes caller-owned
+randomness, avoids the last four recipe keys, and uses a known admitted fallback
+after four draws. It adds no PRNG, clock or checkpoint store. Real-rule tests
+exercise every combination in all profiles and solo/co-op, including mid-play
+restore; these are automated regression checks, not human depth or fairness
+evidence. Runtime seed checkpoints, mastery, host progression and qualification
+remain required before public game integration. Public entries exclude this code.
 
 ## Catalogue and entry loading
 

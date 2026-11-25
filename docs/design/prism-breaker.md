@@ -280,6 +280,42 @@ relays/fields and co-op responsibilities are introduced in short replayable step
 
 ## Difficulty, endless and mastery
 
+### Private endless room grammar, 24 November
+
+Implement a bounded room composer independently of the unpublished runtime.
+The caller supplies the runtime's `next()` random draw; this package must not
+implement or import another random stream. The future released-runtime adapter
+owns seed/state checkpointing. A strict versioned recipe records round and
+choice, reconstructing exact detached geometry without drawing again.
+
+Rotate four authored room families: banks, timed shutters, relay vaults and local
+currents. Three bounded tiers add targets, armour and spatial decisions; speed
+continues to use the existing capped profiles. Two authored formations and both
+axis reflections vary each family/tier without arbitrary object placement.
+Reflect moving-gate bounds, phase and field forces consistently. Keep every
+solid at least six units forward of the paddle face, with no geometry in the
+launch/return zone. The shortest possible paddle-to-solid round trip at expert
+speed must exceed one second. This geometric budget is not human reaction or
+touch qualification.
+
+Avoid the most recent four recipe keys with at most four random draws, then
+choose the first nonrecent admitted recipe. Invalid draws or malformed history
+fail explicitly. The finite grammar always has a fallback; no retry loop, seed
+count, arbitrary collision rejection or regenerated checkpoint is acceptable.
+Keep stage bounds, relay links and gate travel within the existing parser's
+limits. Recipe/history validation must reject foreign or future identities,
+extra fields, invalid rounds/choices, oversized or duplicate history.
+
+Requirements precede source: deterministic recipe reconstruction; all 96
+family/tier/formation/reflection combinations strictly valid and distinct;
+bounded anti-repeat fallback; malformed entropy/input rejection; detached data;
+safe launch/return clearance; every finite room completed using actual rules
+under all three profiles and solo/co-op, with exact mid-play restore and native
+scene projection. Preserve existing campaign/tutorial witnesses and real public
+bundle exclusion. These are private automated witnesses, not seeded-runtime,
+human depth, fairness, rights, device or public release qualification. Mastery,
+host progression and account/online integration remain separate requirements.
+
 Three named profiles begin with ball speeds of 7, 9 and 11 world units/second,
 five, four and three lives respectively, and corresponding paddle/field/gate
 budgets. These are initial tuning values, not validated fairness. Difficulty

@@ -2,6 +2,12 @@
 
 ## [Unreleased]
 
+- Add private Prism endless room grammar with four alternating mechanics,
+  bounded tiers, strict restorable recipes, caller-owned randomness and bounded
+  anti-repeat fallback. Test finite rooms with the actual rules across profiles
+  and solo/co-op while retaining public exclusion and pending host/qualification
+  work (#2).
+
 - Add strict version/artifact-bound release-batch parsing and structural
   inspection for explicitly selected games, preserving every per-title evidence
   requirement and reporting incomplete selections without granting access (#42).

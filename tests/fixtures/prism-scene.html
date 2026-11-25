@@ -8,12 +8,19 @@ import { createGameSceneAdapter } from '@plasius/gpu-shared/game-scene';
 import { createPrismRules, PRISM_PROFILES, PRISM_WORLD } from '/src/games/prism/rules.ts';
 import { createPrismPresentation } from '/src/games/prism/presentation.ts';
 import { listPrismChallenges, readPrismChallenge } from '/src/games/prism/challenges.ts';
+import { readPrismEndlessRoom } from '/src/games/prism/endless.ts';
 const canvas=document.querySelector('canvas'), status=document.querySelector('#status'), select=document.querySelector('#stage');
 let adapter, rules, state, projection, busy=false;
 const ids=listPrismChallenges();
 for(const id of ids) select.add(new Option(id,id));
+const endlessRooms=new Map();
+for(let tier=0;tier<3;tier++)for(let family=0;family<4;family++)for(let choice=0;choice<8;choice++){
+  const recipe={type:'prismEndlessRecipe',version:'1.0.0',round:tier*8+family,choice};
+  const room=readPrismEndlessRoom(recipe);endlessRooms.set(room.key,recipe);
+  select.add(new Option('Endless '+room.family+' · tier '+tier+' · choice '+choice,room.key));
+}
 async function draw(){adapter.offer(projection.project(state,canvas.width/canvas.height));await adapter.flush();status.textContent=JSON.stringify({stage:state.stageId,phase:state.phase,tick:state.tick,score:state.score,lives:state.lives,paddles:state.paddles.map(({x,y})=>({x,y})),presentation:adapter.getSnapshot()},null,2);}
-async function reset(){adapter?.destroy();const content=readPrismChallenge(select.value);rules=createPrismRules(content,['a','b'],'standard');state=rules.initialState();projection=createPrismPresentation(content,['a','b'],'standard');adapter=await createGameSceneAdapter({enabled:true,canvas,meshes:projection.readMeshes(),width:canvas.width,height:canvas.height});await draw();}
+async function reset(){adapter?.destroy();const content=endlessRooms.has(select.value)?readPrismEndlessRoom(endlessRooms.get(select.value)).stage:readPrismChallenge(select.value);rules=createPrismRules(content,['a','b'],'standard');state=rules.initialState();projection=createPrismPresentation(content,['a','b'],'standard');adapter=await createGameSceneAdapter({enabled:true,canvas,meshes:projection.readMeshes(),width:canvas.width,height:canvas.height});await draw();}
 async function run(action){if(busy)return;busy=true;const controls=document.querySelectorAll('button,select');controls.forEach(control=>control.disabled=true);try{await action();}catch(error){status.textContent='Native check failed: '+(error.code??error.message);console.error(status.textContent);}finally{busy=false;controls.forEach(control=>control.disabled=false);}}
 select.onchange=()=>run(reset);document.querySelector('#reset').onclick=()=>run(reset);
 document.querySelector('#gate').onclick=()=>run(async()=>{for(let i=0;i<150;i++)state=rules.step(state,[]);await draw();});

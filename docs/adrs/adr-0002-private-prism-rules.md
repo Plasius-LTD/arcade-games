@@ -90,3 +90,13 @@ limits even at maximum rule content. Real-adapter contract tests and a separate
 native browser smoke complement the headless rules. This does not establish a
 production host, full accessible presentation, physical-phone performance or
 human qualification; those gates remain unchanged.
+
+The private endless increment retains this boundary. Game-owned finite room
+grammar and recipe validation live in `src/games/prism/endless.ts`; a caller
+supplies random draws, and the future released runtime remains the sole owner
+of seeded state and checkpoints. Recipe reconstruction performs no random draw.
+Four bounded selection attempts followed by a known admitted nonrecent recipe
+avoid unbounded regeneration. All finite geometry/profile/roster combinations
+are exercised through the real rules, not a geometry-only solvability claim.
+Public entries, rights records and qualification remain unchanged; automated
+completion cannot establish human duration or fairness.
