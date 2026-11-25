@@ -8,6 +8,11 @@
   and solo/co-op while retaining public exclusion and pending host/qualification
   work (#2).
 
+- Consume released gpu-shader 0.1.13 to remove qualification-only Playwright
+  and its embedded matcher from normal arcade installs. Restore the required
+  physics React peer in the lock and scan all installed code for bundled copies;
+  external matcher replacement remains pending (#33).
+
 - Add strict version/artifact-bound release-batch parsing and structural
   inspection for explicitly selected games, preserving every per-title evidence
   requirement and reporting incomplete selections without granting access (#42).
