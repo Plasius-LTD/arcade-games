@@ -62,6 +62,15 @@ restore; these are automated regression checks, not human depth or fairness
 evidence. Runtime seed checkpoints, mastery, host progression and qualification
 remain required before public game integration. Public entries exclude this code.
 
+The private `src/games/prism/mastery.ts` projects six challenge objectives from
+host-trusted completions: each profile's campaign, clean clears, shared co-op
+clears and all challenge/profile pairs. Strict canonical facts are bounded to
+180 records; repeated or worse outcomes cannot repeat an unlock or reduce earned
+progress. The module has no storage or timer. The future host must authenticate
+outcomes and apply the projection to current account state transactionally.
+Bank-shot and consecutive-clear goals, account award integration and human
+qualification remain pending. Public entries exclude this private module.
+
 ## Catalogue and entry loading
 
 ```ts

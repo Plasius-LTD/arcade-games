@@ -2,6 +2,11 @@
 
 ## [Unreleased]
 
+- Add private challenge mastery projection for distinct profile, clean and shared
+  co-op clears, with bounded canonical facts, monotonic merges and duplicate/restore
+  idempotency. Retain host authority, account transactions and pending bank/streak
+  objectives; the implementation remains excluded from public bundles (#2).
+
 - Add private Prism endless room grammar with four alternating mechanics,
   bounded tiers, strict restorable recipes, caller-owned randomness and bounded
   anti-repeat fallback. Test finite rooms with the actual rules across profiles

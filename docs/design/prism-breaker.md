@@ -280,6 +280,44 @@ relays/fields and co-op responsibilities are introduced in short replayable step
 
 ## Difficulty, endless and mastery
 
+### Private challenge mastery projection, 25 November
+
+Add game-owned pure mastery rules for authored challenge completions. Existing
+`@plasius/player-system` provides achievement read models, not achievement rule
+execution; the shared runtime owns checkpoints and the future host owns account
+transactions. Reuse the current challenge reader, strict Schema validation and
+Prism terminal-state parser. Do not add storage, a ledger, clock, authentication,
+an achievement framework or a dependency on an unpublished package.
+
+Keep at most one record for each of 30 challenge IDs, three profiles and solo or
+co-op (180 records). Each record contains only the bound identity, no-drain flag
+and two-player contribution flag. Canonical records are detached, strictly
+validated and sorted. Repeated completion merges these flags monotonically;
+duplicate terminal projection or JSON restore produces no new unlock. A worse
+attempt cannot erase a better result. Unknown/tutorial/endless stages, malformed
+records and non-complete rule states cannot grant challenge mastery.
+
+Define six goals: all 30 challenges in each of the three profiles; all 30 without
+a drain in any profile; all 30 in co-op with both paddles contributing; and all
+90 challenge/profile pairs. Solo/co-op records for the same challenge/profile
+count once for profile goals. Goals carry stable instruction keys, finite current
+and target counts, and return fresh data for the future host presentation.
+
+Before source, test empty/partial/full progress, strict malformed/duplicate
+rejection, deterministic ordering, detached output, per-profile isolation,
+monotonic merging, duplicate/restore idempotency, terminal-state binding and
+actual rules completion in every profile/roster. Preserve all prior completion
+witnesses, game behavior and real bundle exclusion. No elapsed/idle duration can
+advance a goal because these rules contain no timer or duration counter.
+
+This is a projection from host-trusted outcomes, not authentication of their
+history. The host must apply it to its current progress within its existing
+conditional/idempotent transaction boundary, never to client-submitted progress
+or a restored local copy. Separate bank-shot and consecutive-clear goals need
+additional rule/sequence evidence; they remain required follow-up work. Account
+achievement delivery, playable host integration and human/device qualification
+remain pending, with public entries and rollout flags unchanged.
+
 ### Private endless room grammar, 24 November
 
 Implement a bounded room composer independently of the unpublished runtime.

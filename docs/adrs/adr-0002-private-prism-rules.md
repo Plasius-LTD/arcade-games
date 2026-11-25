@@ -100,3 +100,15 @@ avoid unbounded regeneration. All finite geometry/profile/roster combinations
 are exercised through the real rules, not a geometry-only solvability claim.
 Public entries, rights records and qualification remain unchanged; automated
 completion cannot establish human duration or fairness.
+
+The private challenge mastery projection keeps achievement evaluation in the
+game while account authority and atomic persistence stay in the host. It reuses
+the canonical challenge and terminal-state parsers and stores only bounded,
+monotonic per-challenge/profile/mode facts. A repeated terminal result or restored
+copy cannot add another distinct clear or re-emit an already-complete goal when
+applied to current progress. No elapsed time, database, ledger or shared
+achievement framework is added. The existing player-system achievement read
+model can display curated results later; it does not own these game rules.
+Shape-valid input remains untrusted unless the host authenticates its origin and
+commits against current account state. Public inclusion, bank/streak objectives
+and human/device qualification remain pending.
