@@ -2,6 +2,30 @@
 
 ## [Unreleased]
 
+- Schedule all 180 campaign and 576 endless completion/restore witnesses across
+  bounded test files, preserving every case, assertion, digest and coverage/timeout
+  gate. Guard complete, unique partition membership (#2).
+
+- Replace external Picomatch implementations with verified public Plasius Glob
+  1.0.2 and exact Minimatch 11.0.9. Enforce installed identity/integrity and scan
+  all installed code without the earlier external-package exclusion (#33).
+
+- Add private challenge mastery projection for distinct profile, clean and shared
+  co-op clears, with bounded canonical facts, monotonic merges and duplicate/restore
+  idempotency. Retain host authority, account transactions and pending bank/streak
+  objectives; the implementation remains excluded from public bundles (#2).
+
+- Add private Prism endless room grammar with four alternating mechanics,
+  bounded tiers, strict restorable recipes, caller-owned randomness and bounded
+  anti-repeat fallback. Test finite rooms with the actual rules across profiles
+  and solo/co-op while retaining public exclusion and pending host/qualification
+  work (#2).
+
+- Consume released gpu-shader 0.1.13 to remove qualification-only Playwright
+  and its embedded matcher from normal arcade installs. Restore the required
+  physics React peer in the lock and scan all installed code for bundled copies;
+  external matcher replacement remains pending (#33).
+
 - Adopt the shared Schema first-registration template with the standard temporary
   `NPM_TOKEN`, exact enrollment and subsequent tokenless OIDC handover (#47).
 
@@ -33,6 +57,11 @@
   validation and spatial collision/input regressions using released Plasius
   physics. The engine is not exported or bundled; content, host integration and
   human/device/rights qualification remain pending (#2).
+
+- Replace tsup's embedded Picomatch build dependency with direct esbuild and
+  TypeScript declaration generation, preserving all public entry formats, lazy
+  imports and the exact packed inventory; external test-tool removal remains
+  tracked separately (#33).
 
 - Reuse Schema release-note preparation and validation, preserving authored
   history and rejecting empty or placeholder release notes before publication.
