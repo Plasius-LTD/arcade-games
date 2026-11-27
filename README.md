@@ -35,6 +35,9 @@ rules launch/restore for all profiles in solo/co-op. A test-only pilot also supp
 final-state digests and identical outcomes after a mid-play JSON state round trip.
 Each profile/roster runs as a separate instrumented test with a two-minute limit
 and a 36,000-tick simulation bound, retaining the full 180-scenario matrix.
+Three campaign files and twelve endless family/tier files let the existing test
+workers schedule all 756 completion/restore cases independently. An inventory
+regression guards exactly-once membership; coverage and timeout gates are unchanged.
 Both paddles contribute in co-op. These are automated headless trajectories, not
 human fairness, touch usability or play-depth evidence. The private tutorial,
 endless rooms and scene projector are described below; released-runtime host

@@ -234,6 +234,19 @@ finale, although the local suite passed. Preserve that two-minute per-case limit
 the 36,000-tick simulation bound, the complete matrix and all coverage gates;
 isolate scenarios instead of changing the budgets or omitting instrumentation.
 
+The full coverage run now contains 576 endless completion/restore cases in one
+file. On the CI runner that single worker outlasted the 30-minute job while the
+180 authored cases finished in 18 minutes. Partition independent witness cases
+into bounded files so Vitest's existing file workers can schedule them: three
+campaign groups of ten challenges (60 cases each) and twelve endless family/tier
+groups (48 cases each). Share the unchanged assertions through test-only suite
+helpers. Preserve every discovered test name, content/input/final-state digest,
+restore, score, terminal and co-op assertion. Add an inventory regression for
+exactly-once partition membership before moving cases. Keep the existing full
+coverage command, instrumentation, job/per-case limits and all thresholds; no
+workflow or production rule change is needed. Verify the complete local suite
+and exact-source CI before accepting this scheduling change.
+
 These are distinct authoring requirements. Each needs actual versioned geometry,
 objectives, validation and a unique content digest before it counts in the
 inventory. New colours, reordered IDs or a random seed do not create a distinct

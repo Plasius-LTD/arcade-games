@@ -2,6 +2,10 @@
 
 ## [Unreleased]
 
+- Schedule all 180 campaign and 576 endless completion/restore witnesses across
+  bounded test files, preserving every case, assertion, digest and coverage/timeout
+  gate. Guard complete, unique partition membership (#2).
+
 - Replace external Picomatch implementations with verified public Plasius Glob
   1.0.2 and exact Minimatch 11.0.9. Enforce installed identity/integrity and scan
   all installed code without the earlier external-package exclusion (#33).
